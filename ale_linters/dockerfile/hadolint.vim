@@ -42,22 +42,7 @@ endfunction
 " 'nope, can't use this linter!'.
 
 function! ale_linters#dockerfile#hadolint#GetExecutable(buffer) abort
-    let l:use_docker = ale#Var(a:buffer, 'dockerfile_hadolint_use_docker')
-
-    " check for mandatory directives
-    if l:use_docker ==# 'never'
-        return 'hadolint'
-    elseif l:use_docker ==# 'always'
-        return 'docker'
-    endif
-
-    " if we reach here, we want to use 'hadolint' if present...
-    if executable('hadolint')
-        return 'hadolint'
-    endif
-
-    "... and 'docker' as a fallback.
-    return 'docker'
+    return ale#docker#GetBufExecutable(a:buffer, 'dockerfile_hadolint', 'hadolint')
 endfunction
 
 function! ale_linters#dockerfile#hadolint#GetCommand(buffer) abort
