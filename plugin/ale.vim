@@ -186,6 +186,9 @@ call ale#Set('completion_enabled', 0)
 call ale#Set('completion_delay', 300)
 call ale#Set('completion_max_suggestions', 20)
 
+" disable running things via docker globally
+call ale#Set('allow_docker', 0)
+
 function! ALEInitAuGroups() abort
     " This value used to be a Boolean as a Number, and is now a String.
     let l:text_changed = '' . g:ale_lint_on_text_changed
