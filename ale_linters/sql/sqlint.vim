@@ -2,6 +2,7 @@
 " Description: sqlint for SQL files
 
 " always, yes, never
+call ale#Set('sql_sqlint_executable', 'sqlint')
 call ale#Set('sql_sqlint_use_docker', 'never')
 call ale#Set('sql_sqlint_docker_image', 'rsrchboy/sqlint:latest')
 
@@ -24,8 +25,12 @@ function! ale_linters#sql#sqlint#Handle(buffer, lines) abort
     return l:output
 endfunction
 
+function! ale_linters#sql#sqlint#GetCommand(buffer) abort
+    return ale#Var(a:buffer, 'sql_sqlint_executable')
+endfunction
+
 function! ale_linters#sql#sqlint#GetExecutable(buffer) abort
-    return ale#docker#GetBufExecutable(a:buffer, 'sql_sqlint', 'sqlint')
+    return ale#docker#GetBufExec(a:buffer, 'sql_sqlint')
 endfunction
 
 function! ale_linters#sql#sqlint#GetDockerCommand(buffer) abort
@@ -33,9 +38,9 @@ function! ale_linters#sql#sqlint#GetDockerCommand(buffer) abort
 endfunction
 
 call ale#linter#Define('sql', {
-\   'name': 'sqlint',
-\   'executable_callback': 'ale_linters#sql#sqlint#GetExecutable',
-\   'command': 'sqlint',
+\   'name':                    'sqlint',
+\   'executable_callback':     'ale_linters#sql#sqlint#GetExecutable',
+\   'command_callback':        'ale_linters#sql#sqlint#GetCommand',
 \   'docker_command_callback': 'ale_linters#sql#sqlint#GetDockerCommand',
-\   'callback': 'ale_linters#sql#sqlint#Handle',
+\   'callback':                'ale_linters#sql#sqlint#Handle',
 \})
