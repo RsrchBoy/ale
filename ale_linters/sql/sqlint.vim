@@ -25,7 +25,7 @@ function! ale_linters#sql#sqlint#Handle(buffer, lines) abort
 endfunction
 
 function! ale_linters#sql#sqlint#GetExecutable(buffer) abort
-    return ale#docker#GetdufExecutable(a:buffer, 'sql_sqlint', 'sqlint')
+    return ale#docker#GetBufExecutable(a:buffer, 'sql_sqlint', 'sqlint')
 endfunction
 
 function! ale_linters#sql#sqlint#GetDockerCommand(buffer) abort
