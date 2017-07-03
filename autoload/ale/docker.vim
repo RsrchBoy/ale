@@ -26,3 +26,7 @@ function! ale#docker#GetBufExecutable(buffer, linter, other_cmd) abort
     "... and 'docker' as a fallback.
     return 'docker'
 endfunction
+
+function! ale#docker#RunCmd(buffer, image) abort
+    return 'docker ' . ale#Var(a:buffer, 'docker_run_cmd') . a:image
+endfunction
