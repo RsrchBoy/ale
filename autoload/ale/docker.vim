@@ -6,7 +6,7 @@
 function! ale#docker#GetBufExecutable(buffer, linter, other_cmd) abort
 
     " if override says 'nope!' then just return
-    if !ale#Var(a:buffer, 'allow_docker')
+    if !ale#Var(a:buffer, 'docker_allow')
         return a:other_cmd
     endif
 
