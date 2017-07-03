@@ -1,6 +1,10 @@
 " Author: Adriaan Zonnenberg <amz@adriaan.xyz>
 " Description: sqlint for SQL files
 
+" always, yes, never
+call ale#Set('sql_sqlint_use_docker', 'never')
+call ale#Set('sql_sqlint_docker_image', 'rsrchboy/sqlint:latest')
+
 function! ale_linters#sql#sqlint#Handle(buffer, lines) abort
     " Matches patterns like the following:
     "
@@ -20,9 +24,19 @@ function! ale_linters#sql#sqlint#Handle(buffer, lines) abort
     return l:output
 endfunction
 
+function! ale_linters#sql#sqlint#GetExecutable(buffer) abort
+    return ale#docker#GetdufExecutable(a:buffer, 'sql_sqlint', 'sqlint')
+endfunction
+
+function! ale_linters#sql#sqlint#GetDockerCommand(buffer) abort
+    return ale_linters#sql#sqlint#GetExecutable(a:buffer)
+    \ . ale#Var(a:buffer, 'docker_run_cmd') . ale#Var(a:buffer, 'sql_sqlint_docker_image')
+endfunction
+
 call ale#linter#Define('sql', {
 \   'name': 'sqlint',
-\   'executable': 'sqlint',
+\   'executable_callback': 'ale_linters#sql#sqlint#GetExecutable',
 \   'command': 'sqlint',
+\   'docker_command_callback': 'ale_linters#sql#sqlint#GetDockerCommand',
 \   'callback': 'ale_linters#sql#sqlint#Handle',
 \})
