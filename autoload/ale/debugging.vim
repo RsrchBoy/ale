@@ -2,6 +2,9 @@
 " Description: This file implements debugging information for ALE
 
 let s:global_variable_list = [
+\    'ale_docker_allow',
+\    'ale_docker_executable',
+\    'ale_docker_run_cmd',
 \    'ale_echo_cursor',
 \    'ale_echo_msg_error_str',
 \    'ale_echo_msg_format',
