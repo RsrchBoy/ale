@@ -1,6 +1,8 @@
 Before:
   Save g:ale_warn_about_trailing_whitespace
   Save g:ale_linters
+  Save g:ale_docker_allow
+  let g:ale_docker_allow = 0
 
   let g:ale_warn_about_trailing_whitespace = 1
 
