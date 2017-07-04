@@ -1,6 +1,7 @@
 " Author: hauleth - https://github.com/hauleth
 
 " always, yes, never
+call ale#Set('dockerfile_hadolint_executable', 'hadolint')
 call ale#Set('dockerfile_hadolint_use_docker', 'never')
 call ale#Set('dockerfile_hadolint_docker_image', 'lukasmartinelli/hadolint')
 
@@ -42,7 +43,7 @@ endfunction
 " 'nope, can't use this linter!'.
 
 function! ale_linters#dockerfile#hadolint#GetExecutable(buffer) abort
-    return ale#docker#GetBufExecutable(a:buffer, 'dockerfile_hadolint', 'hadolint')
+    return ale#docker#GetBufExec(a:buffer, 'dockerfile_hadolint')
 endfunction
 
 function! ale_linters#dockerfile#hadolint#GetCommand(buffer) abort
