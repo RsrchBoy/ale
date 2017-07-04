@@ -189,7 +189,7 @@ call ale#Set('completion_max_suggestions', 20)
 " disable running things via docker globally
 call ale#Set('docker_allow', 0)
 call ale#Set('docker_executable', 'docker')
-call ale#Set('docker_run_cmd', ' run --rm -i ')
+call ale#Set('docker_run_cmd', 'run --rm -i')
 
 function! ALEInitAuGroups() abort
     " This value used to be a Boolean as a Number, and is now a String.
