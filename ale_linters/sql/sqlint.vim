@@ -29,8 +29,7 @@ function! ale_linters#sql#sqlint#GetExecutable(buffer) abort
 endfunction
 
 function! ale_linters#sql#sqlint#GetDockerCommand(buffer) abort
-    return ale_linters#sql#sqlint#GetExecutable(a:buffer)
-    \ . ale#Var(a:buffer, 'docker_run_cmd') . ale#Var(a:buffer, 'sql_sqlint_docker_image')
+    return ale#docker#RunCmd(a:buffer, 'sql_sqlint')
 endfunction
 
 call ale#linter#Define('sql', {
