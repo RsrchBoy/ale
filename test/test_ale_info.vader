@@ -14,6 +14,9 @@ Before:
   let g:globals_lines = [
   \  ' Global Variables:',
   \  '',
+  \  'let g:ale_docker_allow = 0',
+  \  "let g:ale_docker_executable = 'docker'",
+  \  "let g:ale_docker_run_cmd = 'run --rm -i'".
   \  'let g:ale_echo_cursor = 1',
   \  'let g:ale_echo_msg_error_str = ''Error''',
   \  'let g:ale_echo_msg_format = ''%s''',
