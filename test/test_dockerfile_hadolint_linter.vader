@@ -5,8 +5,10 @@ Given dockerfile:
   #
 
 Before:
+  Save g:ale_docker_allow
   Save g:ale_dockerfile_hadolint_use_docker
   Save g:ale_dockerfile_hadolint_docker_image
+  let g:ale_docker_allow = 1
   silent! unlet g:ale_dockerfile_hadolint_use_docker
   silent! unlet g:ale_dockerfile_hadolint_docker_image
 
