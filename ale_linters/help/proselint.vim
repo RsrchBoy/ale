@@ -2,8 +2,8 @@
 " Description: proselint for Vim help files
 
 call ale#linter#Define('help', {
-\   'name': 'proselint',
+\   'name':       'proselint',
 \   'executable': 'proselint',
-\   'command': 'proselint %t',
-\   'callback': 'ale#handlers#unix#HandleAsWarning',
+\   'command':    'proselint %t',
+\   'callback':   'ale#handlers#unix#HandleAsWarning',
 \})
