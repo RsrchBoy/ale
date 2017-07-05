@@ -71,4 +71,40 @@ g:ale_perl_perlcritic_showrules               *g:ale_perl_perlcritic_showrules*
 
 
 -------------------------------------------------------------------------------
+proselint                                                  *ale-perl-proselint*
+
+g:ale_perl_proselint_use_docker               *g:ale_perl_proselint_use_docker*
+                                              *b:ale_perl_proselint_use_docker*
+  Type: |String|
+  Default: `'never'`
+
+  This variable controls if the proselint linter is run inside a container,
+  via docker.  If the value is:
+
+    `'never'`:  docker will never be used;
+    `'always'`: docker will always be used;
+    `'yes'`:    docker will be used if the proselint executable (see
+              |g:ale_perl_proselint_executable|) is not discovered by
+              |executable()|.
+
+
+g:ale_perl_proselint_executable               *g:ale_perl_proselint_executable*
+                                              *b:ale_perl_proselint_executable*
+  Type: |String|
+  Default: `'proselint'`
+
+  This variable can be changed to modify the proselint executable used for
+  linting the pod embedded in Perl.
+
+
+g:ale_perl_proselint_docker_image           *g:ale_perl_proselint_docker_image*
+                                            *b:ale_perl_proselint_docker_image*
+  Type: |String|
+  Default: `'rsrchboy/proselint:latest'`
+
+  This variable can be changed to modify the proselint docker image used for
+  linting the pod embedded in Perl.
+
+
+-------------------------------------------------------------------------------
   vim:tw=78:ts=2:sts=2:sw=2:ft=help:norl:
