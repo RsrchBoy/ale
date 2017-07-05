@@ -69,6 +69,7 @@ CONTENTS                                                         *ale-contents*
     perl..................................|ale-perl-options|
       perl................................|ale-perl-perl|
       perlcritic..........................|ale-perl-perlcritic|
+      proselint...........................|ale-perl-proselint|
     php...................................|ale-php-options|
       phpcs...............................|ale-php-phpcs|
       phpmd...............................|ale-php-phpmd|
