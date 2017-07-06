@@ -299,7 +299,12 @@ function! ale#job#Stop(job_id) abort
 
         if ale#job#IsRunning(l:job)
             " Set a 100ms delay for killing the job with SIGKILL.
-            let s:job_kill_timers[timer_start(100, function('s:KillHandler'))] = l:job
+            " FIXME make this docker specific: bump the kill timer to 400ms
+            " (seems to take 200-300 ms to actually terminate; SIGKILL can't
+            " be proxied, so killing the docker client just leaves old
+            " containers kicking around, despite '--rm' (that's handled by the
+            " client in interactive runs)
+            let s:job_kill_timers[timer_start(400, function('s:KillHandler'))] = l:job
         endif
     endif
 endfunction
