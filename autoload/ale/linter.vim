@@ -59,9 +59,13 @@ function! ale#linter#PreProcess(linter) abort
         throw '`name` must be defined to name the linter'
     endif
 
+    let l:docker_native
+    \   = has_key(a:linter, 'docker_native')
+    \   ? get(a:linter, 'docker_native')
+    \   : 0
     let l:needs_address = l:obj.lsp ==# 'socket'
-    let l:needs_executable = l:obj.lsp !=# 'socket'
-    let l:needs_command = l:obj.lsp !=# 'socket'
+    let l:needs_executable = (l:obj.lsp !=# 'socket') && !l:docker_native
+    let l:needs_command = (l:obj.lsp !=# 'socket') && !l:docker_native
 
     if empty(l:obj.lsp)
         let l:obj.callback = get(a:linter, 'callback')
@@ -162,12 +166,29 @@ function! ale#linter#PreProcess(linter) abort
         \   . 'should be set'
     endif
 
+    " various bits to support dockery things
     if has_key(a:linter, 'docker_command')
         let l:obj.docker_command = get(a:linter, 'docker_command')
     endif
     if has_key(a:linter, 'docker_command_callback')
         let l:obj.docker_command_callback = get(a:linter, 'docker_command_callback')
     endif
+    if l:docker_native
+        let l:obj.docker_native = 1
+        let l:obj.executable = 'docker'
+        for l:arg in ['executable', 'executable_callback']
+            if has_key(a:linter, l:arg)
+                throw 'With `docker_native` set, ' . l:arg . ' makes no sense.'
+            endif
+        endfor
+        if !has_key(a:linter, 'command') && !has(a:linter, 'command_callback')
+            " FIXME docker_... variants, too
+            let l:obj.command_callback = 'ale#docker#StdRunCmdCallback'
+        endif
+    else
+        let l:obj.docker_native = 0
+    endif
+
 
     if !l:needs_address
         if has_key(a:linter, 'address_callback')
@@ -341,6 +362,9 @@ endfunction
 
 " Given a buffer and linter, get the executable String for the linter.
 function! ale#linter#GetExecutable(buffer, linter) abort
+    if a:linter.docker_native
+        return 'docker'
+    endif
     return has_key(a:linter, 'executable_callback')
     \   ? ale#util#GetFunction(a:linter.executable_callback)(a:buffer)
     \   : a:linter.executable
@@ -350,7 +374,17 @@ endfunction
 " The command_chain key is not supported.
 function! ale#linter#GetCommand(buffer, linter) abort
 
+    if a:linter.docker_native
+        " return 'docker'
+        " return ale#util#GetFunction(a:linter.docker_command_callback)(a:buffer, a:linter)
+        return ale#util#GetFunction(a:linter.command_callback)(a:buffer, a:linter)
+    endif
+
     if ale#linter#GetExecutable(a:buffer, a:linter) ==# 'docker'
+        if a:linter.docker_native
+            return ale#docker#RunCmd(a:buffer,
+            \   getbufvar(a:buffer, 'ale_original_filetype').'_'.a:linter.name)
+        endif
         if has_key(a:linter, 'docker_command_callback')
             return ale#util#GetFunction(a:linter.docker_command_callback)(a:buffer)
         elseif has_key(a:linter, 'docker_command')

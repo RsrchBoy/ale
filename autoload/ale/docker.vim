@@ -60,6 +60,11 @@ function! ale#docker#RunCmd(buffer, linter_fullname) abort
     \   . ale#Var(a:buffer, a:linter_fullname . '_docker_image')
 endfunction
 
+function! ale#docker#StdRunCmdCallback:w(buffer, linter) abort
+    return ale#docker#RunCmd(a:buffer,
+    \   getbufvar(a:buffer, 'ale_original_filetype').'_'.a:linter.name)
+endfunction
+
 
 " Returns true if the indicated linter should run via docker for the given
 " buffer

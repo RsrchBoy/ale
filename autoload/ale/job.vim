@@ -167,6 +167,10 @@ function! ale#job#ValidateArguments(command, options) abort
 endfunction
 
 function! ale#job#PrepareCommand(command) abort
+
+    " if this is a docker command, run it directly
+    " if a:command =~# '^docker ' ...
+
     " The command will be executed in a subshell. This fixes a number of
     " issues, including reading the PATH variables correctly, %PATHEXT%
     " expansion on Windows, etc.

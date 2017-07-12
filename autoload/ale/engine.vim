@@ -379,6 +379,9 @@ function! s:RunJob(options) abort
         return 0
     endif
 
+    " TODO wrap command, e.g.
+    " ale#command#MaybeDockerize(l:options)...
+
     let [l:temporary_file, l:command] = ale#command#FormatCommand(l:buffer, l:command, l:read_buffer)
 
     if s:CreateTemporaryFileForJob(l:buffer, l:temporary_file)
@@ -531,6 +534,7 @@ endfunction
 function! s:InvokeChain(buffer, linter, chain_index, input) abort
     let l:options = ale#engine#ProcessChain(a:buffer, a:linter, a:chain_index, a:input)
 
+    " l:options.linter = a:linter # ???
     return s:RunJob(l:options)
 endfunction
 
@@ -616,6 +620,9 @@ endfunction
 function! s:RunLinter(buffer, linter) abort
     if empty(a:linter.lsp) || a:linter.lsp ==# 'tsserver'
         let l:executable = ale#linter#GetExecutable(a:buffer, a:linter)
+
+        " FIXME TODO here is where we can do the docker swizzle!
+        " ...maybe.
 
         " Run this program if it can be executed.
         if s:IsExecutable(l:executable)
