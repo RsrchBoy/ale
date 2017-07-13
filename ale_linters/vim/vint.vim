@@ -1,6 +1,8 @@
 " Author: w0rp <devw0rp@gmail.com>, KabbAmine <amine.kabb@gmail.com>
 " Description: This file adds support for checking Vim code with Vint.
 
+let s:linter = 'vim_vint'
+
 " This flag can be used to change enable/disable style issues.
 let g:ale_vim_vint_show_style_issues =
 \   get(g:, 'ale_vim_vint_show_style_issues', 1)
@@ -51,13 +53,9 @@ function! ale_linters#vim#vint#GetCommand(buffer, version_output) abort
     " \   . ' %t'
 endfunction
 
-function! ale_linters#vim#vint#GetExecutable(buffer) abort
-    return ale#docker#GetBufExec(a:buffer, 'vim_vint')
-endfunction
-
 call ale#linter#Define('vim', {
 \   'name': 'vint',
-\   'executable_callback': 'ale_linters#vim#vint#GetExecutable',
+\   'executable_callback': { buffer -> ale#docker#GetBufExec(buffer, s:linter) },
 \   'command_chain': [
 \       {'callback': 'ale_linters#vim#vint#VersionCommand', 'output_stream': 'stderr'},
 \       {'callback': 'ale_linters#vim#vint#GetCommand', 'read_buffer': 1, 'output_stream': 'stdout'},
