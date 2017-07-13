@@ -1,5 +1,7 @@
 " Author: hauleth - https://github.com/hauleth
 
+let s:linter = 'dockerfile_hadolint'
+
 " always, yes, never
 call ale#Set('dockerfile_hadolint_executable', 'hadolint')
 call ale#Set('dockerfile_hadolint_use_docker', 'never')
@@ -34,20 +36,8 @@ function! ale_linters#dockerfile#hadolint#Handle(buffer, lines) abort
     return l:output
 endfunction
 
-" This is a little different than the typical 'executable' callback.  We want
-" to afford the user the chance to say always use docker, never use docker,
-" and use docker if the hadolint executable is not present on the system.
-"
-" In the case of neither docker nor hadolint executables being present, it
-" really doesn't matter which we return -- either will have the effect of
-" 'nope, can't use this linter!'.
-
-function! ale_linters#dockerfile#hadolint#GetExecutable(buffer) abort
-    return ale#docker#GetBufExec(a:buffer, 'dockerfile_hadolint')
-endfunction
-
 function! ale_linters#dockerfile#hadolint#GetCommand(buffer) abort
-    let l:command = ale_linters#dockerfile#hadolint#GetExecutable(a:buffer)
+    let l:command = ale#docker#GetBufExec(a:buffer, s:linter)
     if l:command ==# 'docker'
         return 'docker run --rm -i ' . ale#Var(a:buffer, 'dockerfile_hadolint_docker_image')
     endif
@@ -57,7 +47,7 @@ endfunction
 
 call ale#linter#Define('dockerfile', {
 \   'name': 'hadolint',
-\   'executable_callback': 'ale_linters#dockerfile#hadolint#GetExecutable',
+\   'executable_callback': { buffer -> ale#docker#GetBufExec(buffer, s:linter) },
 \   'command_callback': 'ale_linters#dockerfile#hadolint#GetCommand',
 \   'callback': 'ale_linters#dockerfile#hadolint#Handle',
 \})
