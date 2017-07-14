@@ -36,18 +36,10 @@ function! ale_linters#dockerfile#hadolint#Handle(buffer, lines) abort
     return l:output
 endfunction
 
-function! ale_linters#dockerfile#hadolint#GetCommand(buffer) abort
-    let l:command = ale#docker#GetBufExec(a:buffer, s:linter)
-    if l:command ==# 'docker'
-        return 'docker run --rm -i ' . ale#Var(a:buffer, 'dockerfile_hadolint_docker_image')
-    endif
-    return 'hadolint -'
-endfunction
-
 
 call ale#linter#Define('dockerfile', {
 \   'name': 'hadolint',
 \   'executable_callback': { buffer -> ale#docker#GetBufExec(buffer, s:linter) },
-\   'command_callback': 'ale_linters#dockerfile#hadolint#GetCommand',
+\   'command_callback':    { buffer -> ale#docker#GetCommand(buffer, s:linter) },
 \   'callback': 'ale_linters#dockerfile#hadolint#Handle',
 \})
