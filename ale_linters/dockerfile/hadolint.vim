@@ -39,7 +39,7 @@ endfunction
 
 call ale#linter#Define('dockerfile', {
 \   'name': 'hadolint',
-\   'executable_callback': { buffer -> ale#docker#GetBufExec(buffer, s:linter) },
-\   'command_callback':    { buffer -> ale#docker#GetCommand(buffer, s:linter) },
+\   'executable_callback': { buffer -> ale#linter#util#GetBufExec(buffer, s:linter) },
+\   'command_callback':    { buffer -> ale#linter#util#GetCommand(buffer, s:linter) },
 \   'callback': 'ale_linters#dockerfile#hadolint#Handle',
 \})
