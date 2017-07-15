@@ -41,6 +41,8 @@ CONTENTS                                                         *ale-contents*
       gometalinter........................|ale-go-gometalinter|
     handlebars............................|ale-handlebars-options|
       ember-template-lint.................|ale-handlebars-embertemplatelint|
+    haskell...............................|ale-haskell-options|
+      stack-build.........................|ale-haskell-stack-build|
     html..................................|ale-html-options|
       htmlhint............................|ale-html-htmlhint|
       tidy................................|ale-html-tidy|
@@ -83,6 +85,8 @@ CONTENTS                                                         *ale-contents*
       pylint..............................|ale-python-pylint|
       yapf................................|ale-python-yapf|
     ruby..................................|ale-ruby-options|
+      brakeman............................|ale-ruby-brakeman|
+      rails_best_practices................|ale-ruby-rails_best_practices|
       reek................................|ale-ruby-reek|
       rubocop.............................|ale-ruby-rubocop|
     rust..................................|ale-rust-options|
@@ -90,6 +94,8 @@ CONTENTS                                                         *ale-contents*
       rustc...............................|ale-rust-rustc|
     sass..................................|ale-sass-options|
       stylelint...........................|ale-sass-stylelint|
+    scala.................................|ale-scala-options|
+      scalastyle..........................|ale-scala-scalastyle|
     scss..................................|ale-scss-options|
       stylelint...........................|ale-scss-stylelint|
     sh....................................|ale-sh-options|
@@ -203,7 +209,7 @@ The following languages and tools are supported.
 * Ruby: 'reek', 'rubocop'
 * SASS: 'sasslint', 'stylelint'
 * SCSS: 'sasslint', 'scsslint', 'stylelint'
-* Scala: 'scalac'
+* Scala: 'scalac', 'scalastyle'
 * Slim: 'slim-lint'
 * SML: 'smlnj'
 * Stylus: 'stylelint'
@@ -814,12 +820,12 @@ g:ale_type_map                                                 *g:ale_type_map*
   For example, if you want to turn flake8 errors into warnings, you can do
   the following: >
 
-  let g:ale_type_map = {'flake8', {'ES': 'WS', 'E': 'W'}}
+  let g:ale_type_map = {'flake8': {'ES': 'WS', 'E': 'W'}}
 <
   If you wanted to turn style errors and warnings into regular errors and
   warnings, you can use the following: >
 
-  let g:ale_type_map = {'flake8', {'ES': 'E', 'WS': 'W'}}
+  let g:ale_type_map = {'flake8': {'ES': 'E', 'WS': 'W'}}
 <
   Type maps can be set per-buffer with `b:ale_type_map`.
 
@@ -1488,8 +1494,10 @@ ALELint                                                       *ALELint-autocmd*
 
   For example, you can echo a message when linting is complete like so:
   >
-  autocmd User ALELint echom "ALE run!"
+  autocmd User ALELint unsilent echom 'ALE run!'
 <
+  The autocmd commands are run with |:silent|, so |:unsilent| is required for
+  echoing messges.
 
 ===============================================================================
 8. Special Thanks                                          *ale-special-thanks*
