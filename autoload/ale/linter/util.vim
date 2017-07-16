@@ -55,6 +55,7 @@ function! ale#linter#util#SetStandardVars(linter, executable, image) abort
     call ale#Set(a:linter.'_use_docker', 'never')
     call ale#Set(a:linter.'_docker_image', a:image)
     call ale#Set(a:linter.'_executable', a:executable)
+    call ale#Set(a:linter.'_options', '')
     return
 endfunction
 
