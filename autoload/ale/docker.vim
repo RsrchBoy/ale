@@ -15,13 +15,15 @@ function! ale#docker#RunCmd(buffer, linter_fullname) abort
 endfunction
 
 function! ale#docker#PrepareRunCmd(buffer, linter_fullname, command) abort
-    " simple, rather than the more appropriate 'has %t?' checking for the
-    " moment
+
+    " Ensure the file is appropriately accessible.
+    let l:volumes = a:command =~# '%t' ? ' -v %t:%t:ro ' : ''
+
     return 'docker '
-    \   . ale#Var(a:buffer, 'docker_run_cmd') . ' --entrypoint="" -v %t:%t:ro '
+    \   . ale#Var(a:buffer, 'docker_run_cmd') . ' --entrypoint="" '
+    \   . l:volumes
     \   . ale#Var(a:buffer, a:linter_fullname.'_docker_image') . ' '
     \   . a:command
-    " \   . ale#Var(a:buffer, a:linter_fullname.'_executable') . ' %t'
 endfunction
 
 function! ale#docker#StdRunCmdCallback(buffer, linter) abort
