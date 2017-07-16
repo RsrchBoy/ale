@@ -11,7 +11,7 @@ function! ale_linters#dockerfile#hadolint#Handle(buffer, lines) abort
     " Matches patterns line the following:
     "
     " stdin:19: F: Pipe chain should start with a raw value.
-    let l:pattern = '\v^/dev/stdin:?(\d+)? (\S+) (.+)$'
+    let l:pattern = '\v^[^:]*:?(\d+)? (\S+) (.+)$'
     let l:output = []
 
     for l:match in ale#util#GetMatches(a:lines, l:pattern)
