@@ -2,10 +2,7 @@
 
 let s:linter = 'dockerfile_hadolint'
 
-" always, yes, never
-call ale#Set('dockerfile_hadolint_executable', 'hadolint')
-call ale#Set('dockerfile_hadolint_use_docker', 'never')
-call ale#Set('dockerfile_hadolint_docker_image', 'lukasmartinelli/hadolint')
+call ale#linter#util#SetStandardVars(s:linter, 'hadolint', 'lukasmartinelli/hadolint')
 
 function! ale_linters#dockerfile#hadolint#Handle(buffer, lines) abort
     " Matches patterns line the following:
