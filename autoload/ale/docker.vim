@@ -20,7 +20,6 @@ function! ale#docker#PrepareRunCmd(buffer, linter_fullname, command) abort
     return 'docker '
     \   . ale#Var(a:buffer, 'docker_run_cmd') . ' --entrypoint="" -v %t:%t:ro '
     \   . ale#Var(a:buffer, a:linter_fullname.'_docker_image') . ' '
-    \   . ale#Var(a:buffer, a:linter_fullname.'_executable') . ' '
     \   . a:command
     " \   . ale#Var(a:buffer, a:linter_fullname.'_executable') . ' %t'
 endfunction
