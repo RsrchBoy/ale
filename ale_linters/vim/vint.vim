@@ -10,20 +10,14 @@ let s:enable_neovim = has('nvim') ? ' --enable-neovim ' : ''
 let s:format = '-f "{file_path}:{line_number}:{column_number}: {severity}: {description} (see {reference})"'
 let s:vint_version = []
 
-" always, yes, never
-call ale#Set('vim_vint_executable', 'vint')
-call ale#Set('vim_vint_use_docker', 'never')
-call ale#Set('vim_vint_docker_image', 'rsrchboy/vint:latest')
+call ale#linter#util#SetStandardVars(s:linter, 'vint', 'rsrchboy/vint:latest')
 
 function! ale_linters#vim#vint#VersionCommand(buffer) abort
     if empty(s:vint_version)
-        " override the default entrypoint (our stdin helper shim)
-        let l:save_run_cmd = ale#Var(a:buffer, 'docker_run_cmd')
-        let b:ale_docker_run_cmd = l:save_run_cmd . ' --entrypoint="vint"'
 
         " Check the Vint version if we haven't checked it already.
-        let l:version = ale#docker#RunCmd(a:buffer, 'vim_vint') . ' --version'
-        let b:ale_docker_run_cmd = l:save_run_cmd
+        let l:version = ale#docker#PrepareRunCmd(a:buffer, s:linter,
+        \ ale#Var(a:buffer, s:linter.'_executable') . ' --version')
 
         return l:version
     endif
@@ -37,20 +31,22 @@ function! ale_linters#vim#vint#GetCommand(buffer, version_output) abort
         let s:vint_version = ale#semver#Parse(join(a:version_output, "\n"))
     endif
 
-    " Check the Vint version if we haven't checked it already.
-    let l:command = ale#docker#RunCmd(a:buffer, 'vim_vint')
-
     let l:can_use_no_color_flag = empty(s:vint_version)
     \   || ale#semver#GreaterOrEqual(s:vint_version, [0, 3, 7])
 
     let l:warning_flag = ale#Var(a:buffer, 'vim_vint_show_style_issues') ? '-s' : '-w'
 
-    return l:command . ' '
+    let l:command = ale#Var(a:buffer, s:linter.'_executable') . ' '
     \   . l:warning_flag . ' '
     \   . (l:can_use_no_color_flag ? '--no-color ' : '')
     \   . s:enable_neovim
     \   . s:format
-    " \   . ' %t'
+    \   . ' %t'
+
+    " Check the Vint version if we haven't checked it already.
+    let l:command = ale#docker#PrepareRunCmd(a:buffer, s:linter, l:command)
+
+    return l:command
 endfunction
 
 call ale#linter#Define('vim', {
