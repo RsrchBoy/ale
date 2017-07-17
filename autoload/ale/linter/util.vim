@@ -10,43 +10,39 @@
 "   g:ale_{linter}_use_docker       # always, never, yes
 "   g:ale_{linter}_docker_image     # the linter's image
 "   g:ale_{linter}_executable       # the non-docker executable name
-"
+"   g:ale_{linter}_options          # any options passed to the executable
+
 
 " given a buffer, linter prefix (e.g. 'dockerfile_hadolint'), and the name of
 " the specific command we would run, return whichever of the two (specific
 " command or 'docker') we should be using
 "
-function! ale#linter#util#GetBufExecutable(buffer, linter, other_cmd) abort
+function! ale#linter#util#GetBufExec(buffer, linter) abort
+
+    let l:other_cmd = ale#Var(a:buffer, a:linter.'_executable')
 
     " if override says 'nope!' or we don't have an image defined,
     " then just return
     if !ale#Var(a:buffer, 'docker_allow') || !exists('g:ale_'.a:linter.'_docker_image') || ale#Var(a:linter.'_docker_image') ==# ''
-        return a:other_cmd
+        return l:other_cmd
     endif
 
     " check for mandatory directives
     let l:use_docker = ale#Var(a:buffer, a:linter.'_use_docker')
     if l:use_docker ==# 'never'
-        return a:other_cmd
+        return l:other_cmd
     elseif l:use_docker ==# 'always'
         return 'docker'
     endif
 
     " if we reach here, we want to use 'hadolint' if present...
-    if executable(a:other_cmd)
-        return a:other_cmd
+    if executable(l:other_cmd)
+        return l:other_cmd
     endif
 
     "... and 'docker' as a fallback.
     return 'docker'
 endfunction
-
-" transitional.
-function! ale#linter#util#GetBufExec(buffer, linter) abort
-    return ale#linter#util#GetBufExecutable(a:buffer, a:linter,
-    \   ale#Var(a:buffer, a:linter.'_executable'))
-endfunction
-
 
 " ###########################################################
 
