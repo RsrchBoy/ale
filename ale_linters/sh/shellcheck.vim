@@ -2,6 +2,8 @@
 " Description: This file adds support for using the shellcheck linter with
 "   shell scripts.
 
+let s:linter = 'sh_shellcheck'
+
 " This global variable can be set with a string of comma-seperated error
 " codes to exclude from shellcheck. For example:
 "
@@ -9,28 +11,7 @@
 let g:ale_sh_shellcheck_exclusions =
 \   get(g:, 'ale_sh_shellcheck_exclusions', get(g:, 'ale_linters_sh_shellcheck_exclusions', ''))
 
-let g:ale_sh_shellcheck_executable =
-\   get(g:, 'ale_sh_shellcheck_executable', 'shellcheck')
-
-let g:ale_sh_shellcheck_options =
-\   get(g:, 'ale_sh_shellcheck_options', '')
-
-" always, yes, never
-call ale#Set('sh_shellcheck_use_docker', 'never')
-call ale#Set('sh_shellcheck_docker_image', 'rsrchboy/shellcheck:latest')
-
-function! ale_linters#sh#shellcheck#GetExecutable(buffer) abort
-    return ale#docker#GetBufExecutable(a:buffer, 'sh_shellcheck',
-    \   ale#Var(a:buffer, 'sh_shellcheck_executable'))
-endfunction
-
-" FIXME TODO we're going to have to address making this more... coherent.
-"
-" Perhaps...
-"
-" * ale#docker#RunCmd() can be extended to craft the 'docker run ... image'
-" part w/o requiring any additional lookups
-" * ...
+call ale#linter#util#SetStandardVars(s:linter, 'shellcheck', 'rsrchboy/shellcheck:latest')
 
 function! ale_linters#sh#shellcheck#GetDockerCommand(buffer) abort
     let l:exclude_option = ale#Var(a:buffer, 'sh_shellcheck_exclusions')
@@ -57,16 +38,17 @@ endfunction
 function! ale_linters#sh#shellcheck#GetCommand(buffer) abort
     let l:exclude_option = ale#Var(a:buffer, 'sh_shellcheck_exclusions')
 
-    return ale_linters#sh#shellcheck#GetExecutable(a:buffer)
+    let l:command = ale#Var(a:buffer, s:linter.'_executable')
     \   . ' ' . ale#Var(a:buffer, 'sh_shellcheck_options')
     \   . ' ' . (!empty(l:exclude_option) ? '-e ' . l:exclude_option : '')
     \   . ' ' . s:GetDialectArgument() . ' -f gcc -'
+
+    return ale#docker#PrepareRunCmd(a:buffer, s:linter, l:command)
 endfunction
 
 call ale#linter#Define('sh', {
-\   'name': 'shellcheck',
-\   'executable_callback': 'ale_linters#sh#shellcheck#GetExecutable',
-\   'command_callback': 'ale_linters#sh#shellcheck#GetCommand',
-\   'docker_command_callback': 'ale_linters#sh#shellcheck#GetDockerCommand',
-\   'callback': 'ale#handlers#gcc#HandleGCCFormat',
+\   'name':                'shellcheck',
+\   'executable_callback': { buffer -> ale#linter#util#GetBufExec(buffer, s:linter) },
+\   'command_callback':    'ale_linters#sh#shellcheck#GetCommand',
+\   'callback':            'ale#handlers#gcc#HandleGCCFormat',
 \})
