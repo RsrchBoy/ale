@@ -51,7 +51,7 @@ endfunction
 
 call ale#linter#Define('vim', {
 \   'name': 'vint',
-\   'executable_callback': { buffer -> ale#docker#GetBufExec(buffer, s:linter) },
+\   'executable_callback': { buffer -> ale#linter#util#GetBufExec(buffer, s:linter) },
 \   'command_chain': [
 \       {'callback': 'ale_linters#vim#vint#VersionCommand', 'output_stream': 'stderr'},
 \       {'callback': 'ale_linters#vim#vint#GetCommand', 'read_buffer': 1, 'output_stream': 'stdout'},
