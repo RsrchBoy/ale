@@ -41,6 +41,7 @@ function! ale_linters#vim#vint#GetCommand(buffer, version_output) abort
     \   . (l:can_use_no_color_flag ? '--no-color ' : '')
     \   . s:enable_neovim
     \   . s:format
+    \   . ale#Var(a:buffer, s:linter.'_options')
     \   . ' %t'
 
     " Check the Vint version if we haven't checked it already.
