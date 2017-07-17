@@ -5,12 +5,51 @@ ALE Vim Integration                                           *ale-vim-options*
 ===============================================================================
 vint                                                             *ale-vim-vint*
 
+g:ale_vim_vint_use_docker                           *g:ale_vim_vint_use_docker*
+                                                    *b:ale_vim_vint_use_docker*
+  Type: |String|
+  Default: `'never'`
+
+  This variable controls if this linter may be run via docker: if 'never',
+  docker will never be used; 'always' means docker will always be used; 'yes'
+  and docker will be used if the hadolint executable cannot be found.
+
+  For now, the default is 'never'.  This may change as ale's support for using
+  docker to lint evolves.
+
+
+g:ale_vim_vint_image                                     *g:ale_vim_vint_image*
+                                                         *b:ale_vim_vint_image*
+  Type: |String|
+  Default: `'rsrchboy/vint:latest'`
+
+  This variable controls the docker image used for this linter.  An empty
+  string means that docker will never be used for this linter.
+
+
+g:ale_vim_vint_executable                           *g:ale_vim_vint_executable*
+                                                    *b:ale_vim_vint_executable*
+  Type: |String|
+  Default: `'vint'`
+
+  This variable can be changed to modify the executable used for linting.
+
+
+g:ale_vim_vint_options                                 *g:ale_vim_vint_options*
+                                                       *b:ale_vim_vint_options*
+  Type: |String|
+  Default: `''`
+
+  This variable can be changed to alter the command-line arguments used to
+  invoke the linter.
+
+
 g:ale_vim_vint_show_style_issues             *g:ale_vim_vint_show_style_issues*
                                              *b:ale_vim_vint_show_style_issues*
   Type: |Number|
   Default: `1`
 
-  This variable will enable/disable style issues for Vint. When this option
+  This variable will enable/disable style issues for Vint.  When this option
   is disabled, only warnings and errors which are not purely style issues
   will be reported.
 
