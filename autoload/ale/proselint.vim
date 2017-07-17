@@ -4,9 +4,7 @@
 " What: define a standard proselint linter via one function
 function! ale#proselint#Define(filetype) abort
 
-    call ale#Set(a:filetype.'_proselint_executable',   'proselint')
-    call ale#Set(a:filetype.'_proselint_use_docker',   'never')
-    call ale#Set(a:filetype.'_proselint_docker_image', 'rsrchboy/proselint:latest')
+    call ale#linter#util#SetStandardVars(a:filetype.'_proselint', 'proselint', 'rsrchboy/proselint:latest')
 
     call ale#linter#Define(a:filetype, {
     \   'name':                'proselint',
