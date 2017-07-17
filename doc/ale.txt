@@ -11,6 +11,7 @@ CONTENTS                                                         *ale-contents*
     2.1 Linters via Docker................|ale-support-docker|
   3. Global Options.......................|ale-options|
     3.1 Highlights........................|ale-highlights|
+    3.2 "Standard" linter variables.......|ale-standard-linter-variables|
   4. Fixing Problems......................|ale-fix|
   5. Integration Documentation............|ale-integrations|
     asm...................................|ale-asm-options|
@@ -977,6 +978,56 @@ ALEWarningSign                                                 *ALEWarningSign*
   Default: `highlight link ALEWarningSign todo`
 
   The highlight used for warning signs. See |g:ale_set_signs|.
+
+
+-------------------------------------------------------------------------------
+3.2. "Standard" linter variables                *ale-standard-linter-variables*
+
+ALE linters are starting to use a standard set of variables to control their
+behaviour, most notably the executable used and any additional options to be
+passed. While not universally supported by all linters yet -- pull requests
+are quite welcome ;) -- these are being documented here to spare having
+multiple copies of this documentation copied (and recopied) between the
+linters.
+
+
+g:ale_{ft}_{name}_use_docker                     *g:ale_{ft}_{name}_use_docker*
+                                                 *b:ale_{ft}_{name}_use_docker*
+  Type: |String|
+  Default: `'never'`
+
+  This variable controls if this linter may be run via docker: if 'never',
+  docker will never be used; 'always' means docker will always be used; 'yes'
+  and docker will be used if the hadolint executable cannot be found.
+
+  For now, the default is 'never'. This may change as ale's support for using
+  docker to lint evolves.
+
+
+g:ale_{ft}_{name}_docker_image                 *g:ale_{ft}_{name}_docker_image*
+                                               *b:ale_{ft}_{name}_docker_image*
+  Type: |String|
+  Default: `depends on the linter`
+
+  This variable controls the docker image used for this linter. An empty
+  string means that docker will never be used for this linter.
+
+
+g:ale_{ft}_{name}_executable                     *g:ale_{ft}_{name}_executable*
+                                                 *b:ale_{ft}_{name}_executable*
+  Type: |String|
+  Default: `depends on the linter`
+
+  This variable can be changed to modify the executable used for linting.
+
+
+g:ale_{ft}_{name}_options                           *g:ale_{ft}_{name}_options*
+                                                    *b:ale_{ft}_{name}_options*
+  Type: |String|
+  Default: `depends on the linter`
+
+  This variable can be changed to alter the command-line arguments used to
+  invoke the linter.
 
 
 ===============================================================================
