@@ -162,13 +162,6 @@ function! ale#linter#PreProcess(linter) abort
         \   . 'should be set'
     endif
 
-    if has_key(a:linter, 'docker_command')
-        let l:obj.docker_command = get(a:linter, 'docker_command')
-    endif
-    if has_key(a:linter, 'docker_command_callback')
-        let l:obj.docker_command_callback = get(a:linter, 'docker_command_callback')
-    endif
-
     if !l:needs_address
         if has_key(a:linter, 'address_callback')
             throw '`address_callback` cannot be used when lsp != ''socket'''
@@ -349,17 +342,6 @@ endfunction
 " Given a buffer and linter, get the command String for the linter.
 " The command_chain key is not supported.
 function! ale#linter#GetCommand(buffer, linter) abort
-
-    if ale#linter#GetExecutable(a:buffer, a:linter) ==# 'docker'
-        if has_key(a:linter, 'docker_command_callback')
-            return ale#util#GetFunction(a:linter.docker_command_callback)(a:buffer)
-        elseif has_key(a:linter, 'docker_command')
-            return a:.linter.docker_command
-        endif
-        " if we're here, then instead of ABEND'ing just go on to use the normal
-        " callbacks.
-    endif
-
     return has_key(a:linter, 'command_callback')
     \   ? ale#util#GetFunction(a:linter.command_callback)(a:buffer)
     \   : a:linter.command
