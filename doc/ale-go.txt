@@ -46,4 +46,39 @@ g:ale_go_gometalinter_options                   *g:ale_go_gometalinter_options*
 
 
 ===============================================================================
+golint                                                          *ale-go-golint*
+
+g:ale_go_golint_executable                         *g:ale_go_golint_executable*
+                                                   *b:ale_go_golint_executable*
+  Type: |String|
+  Default: `'golint'`
+
+  See |g:ale_{ft}_{name}_executable|.
+
+
+g:ale_go_golint_use_docker                         *g:ale_go_golint_use_docker*
+                                                   *b:ale_go_golint_use_docker*
+  Type: |String|
+  Default: `'never'`
+
+  See |g:ale_{ft}_{name}_use_docker|.
+
+
+g:ale_go_golint_docker_image                     *g:ale_go_golint_docker_image*
+                                                 *b:ale_go_golint_docker_image*
+  Type: |String|
+  Default: `''`
+
+  See |g:ale_{ft}_{name}_docker_image|.
+
+
+g:ale_go_golint_options                               *g:ale_go_golint_options*
+                                                      *b:ale_go_golint_options*
+  Type: |String|
+  Default: `''`
+
+  See |g:ale_{ft}_{name}_options|.
+
+
+===============================================================================
   vim:tw=78:ts=2:sts=2:sw=2:ft=help:norl:
