@@ -8,8 +8,8 @@ function! ale#proselint#Define(filetype) abort
 
     call ale#linter#Define(a:filetype, {
     \   'name':                'proselint',
-    \   'executable_callback': { buffer -> ale#docker#GetBufExec(buffer, a:filetype.'_proselint') },
-    \   'command_callback':    { buffer -> ale#docker#GetCommand(buffer, a:filetype.'_proselint') },
+    \   'executable_callback': { buffer -> ale#linter#util#GetBufExec(buffer, a:filetype.'_proselint') },
+    \   'command_callback':    { buffer -> ale#linter#util#GetCommand(buffer, a:filetype.'_proselint') },
     \   'callback':            'ale#handlers#unix#HandleAsWarning',
     \})
 endfunction
