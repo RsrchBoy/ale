@@ -3,12 +3,12 @@ ALE Help Integration                                         *ale-help-options*
 
 
 ===============================================================================
-help                                                            *ale-help-vint*
+help                                                       *ale-help-proselint*
 
 g:ale_help_proselint_executable               *g:ale_help_proselint_executable*
                                               *b:ale_help_proselint_executable*
   Type: |String|
-  Default: `'vint'`
+  Default: `'proselint'`
 
   See |g:ale_{ft}_{name}_executable|.
 

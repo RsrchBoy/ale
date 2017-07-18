@@ -25,7 +25,23 @@ g:ale_sh_shellcheck_executable                 *g:ale_sh_shellcheck_executable*
   Type: |String|
   Default: `'shellcheck'`
 
-  This variable sets executable used for shellcheck.
+  See |g:ale_{ft}_{name}_executable|.
+
+
+g:ale_sh_shellcheck_use_docker                 *g:ale_sh_shellcheck_use_docker*
+                                               *b:ale_sh_shellcheck_use_docker*
+  Type: |String|
+  Default: `'never'`
+
+  See |g:ale_{ft}_{name}_use_docker|.
+
+
+g:ale_sh_shellcheck_docker_image             *g:ale_sh_shellcheck_docker_image*
+                                             *b:ale_sh_shellcheck_docker_image*
+  Type: |String|
+  Default: `'rsrchboy/shellcheck:latest'`
+
+  See |g:ale_{ft}_{name}_docker_image|.
 
 
 g:ale_sh_shellcheck_options                       *g:ale_sh_shellcheck_options*
@@ -33,14 +49,8 @@ g:ale_sh_shellcheck_options                       *g:ale_sh_shellcheck_options*
   Type: |String|
   Default: `''`
 
-  With this variable we are able to pass extra arguments for shellcheck
-  for shellcheck invocation.
+  See |g:ale_{ft}_{name}_options|.
 
-  For example, if we want shellcheck to follow external sources (`see SC1091`)
-  we can set the variable as such:
->
-  let g:ale_sh_shellcheck_options = '-x'
-<
 
 g:ale_sh_shellcheck_exclusions                 *g:ale_sh_shellcheck_exclusions*
                                                *b:ale_sh_shellcheck_exclusions*

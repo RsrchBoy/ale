@@ -5,34 +5,28 @@ ALE Vim Integration                                           *ale-vim-options*
 ===============================================================================
 vint                                                             *ale-vim-vint*
 
-g:ale_vim_vint_use_docker                           *g:ale_vim_vint_use_docker*
-                                                    *b:ale_vim_vint_use_docker*
-  Type: |String|
-  Default: `'never'`
-
-  This variable controls if this linter may be run via docker: if 'never',
-  docker will never be used; 'always' means docker will always be used; 'yes'
-  and docker will be used if the hadolint executable cannot be found.
-
-  For now, the default is 'never'.  This may change as ale's support for using
-  docker to lint evolves.
-
-
-g:ale_vim_vint_image                                     *g:ale_vim_vint_image*
-                                                         *b:ale_vim_vint_image*
-  Type: |String|
-  Default: `'rsrchboy/vint:latest'`
-
-  This variable controls the docker image used for this linter.  An empty
-  string means that docker will never be used for this linter.
-
-
 g:ale_vim_vint_executable                           *g:ale_vim_vint_executable*
                                                     *b:ale_vim_vint_executable*
   Type: |String|
   Default: `'vint'`
 
-  This variable can be changed to modify the executable used for linting.
+  See |g:ale_{ft}_{name}_executable|.
+
+
+g:ale_vim_vint_use_docker                           *g:ale_vim_vint_use_docker*
+                                                    *b:ale_vim_vint_use_docker*
+  Type: |String|
+  Default: `'never'`
+
+  See |g:ale_{ft}_{name}_use_docker|.
+
+
+g:ale_vim_vint_docker_image                       *g:ale_vim_vint_docker_image*
+                                                  *b:ale_vim_vint_docker_image*
+  Type: |String|
+  Default: `'rsrchboy/vint:latest'`
+
+  See |g:ale_{ft}_{name}_docker_image|.
 
 
 g:ale_vim_vint_options                                 *g:ale_vim_vint_options*
@@ -40,8 +34,7 @@ g:ale_vim_vint_options                                 *g:ale_vim_vint_options*
   Type: |String|
   Default: `''`
 
-  This variable can be changed to alter the command-line arguments used to
-  invoke the linter.
+  See |g:ale_{ft}_{name}_options|.
 
 
 g:ale_vim_vint_show_style_issues             *g:ale_vim_vint_show_style_issues*

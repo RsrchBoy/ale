@@ -57,4 +57,39 @@ g:ale_html_tidy_options                               *g:ale_html_tidy_options*
 
 
 ===============================================================================
+proselint                                                  *ale-html-proselint*
+
+g:ale_html_proselint_executable               *g:ale_html_proselint_executable*
+                                              *b:ale_html_proselint_executable*
+  Type: |String|
+  Default: `'proselint'`
+
+  See |g:ale_{ft}_{name}_executable|.
+
+
+g:ale_html_proselint_use_docker               *g:ale_html_proselint_use_docker*
+                                              *b:ale_html_proselint_use_docker*
+  Type: |String|
+  Default: `'never'`
+
+  See |g:ale_{ft}_{name}_use_docker|.
+
+
+g:ale_html_proselint_docker_image           *g:ale_html_proselint_docker_image*
+                                            *b:ale_html_proselint_docker_image*
+  Type: |String|
+  Default: `'rsrchboy/proselint:latest'`
+
+  See |g:ale_{ft}_{name}_docker_image|.
+
+
+g:ale_html_proselint_options                     *g:ale_html_proselint_options*
+                                                 *b:ale_html_proselint_options*
+  Type: |String|
+  Default: `''`
+
+  See |g:ale_{ft}_{name}_options|.
+
+
+===============================================================================
   vim:tw=78:ts=2:sts=2:sw=2:ft=help:norl:
