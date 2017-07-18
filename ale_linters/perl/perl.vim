@@ -1,21 +1,11 @@
 " Author: Vincent Lequertier <https://github.com/SkySymbol>
 " Description: This file adds support for checking perl syntax
 
-let g:ale_perl_perl_executable =
-\   get(g:, 'ale_perl_perl_executable', 'perl')
+let s:linter = 'perl_perl'
 
-let g:ale_perl_perl_options =
-\   get(g:, 'ale_perl_perl_options', '-c -Mwarnings -Ilib')
-
-function! ale_linters#perl#perl#GetExecutable(buffer) abort
-    return ale#Var(a:buffer, 'perl_perl_executable')
-endfunction
-
-function! ale_linters#perl#perl#GetCommand(buffer) abort
-    return ale_linters#perl#perl#GetExecutable(a:buffer)
-    \   . ' ' . ale#Var(a:buffer, 'perl_perl_options')
-    \   . ' %t'
-endfunction
+" FIXME need to bind-mount lib/ also
+call ale#Set('perl_perl_options', '-c -Mwarnings -Ilib')
+call ale#linter#util#SetStandardVars(s:linter, 'perl', 'rsrchboy/perl:alpine')
 
 let s:begin_failed_skip_pattern = '\v' . join([
 \   '^Compilation failed in require',
@@ -50,9 +40,9 @@ function! ale_linters#perl#perl#Handle(buffer, lines) abort
 endfunction
 
 call ale#linter#Define('perl', {
-\   'name': 'perl',
-\   'executable_callback': 'ale_linters#perl#perl#GetExecutable',
-\   'output_stream': 'both',
-\   'command_callback': 'ale_linters#perl#perl#GetCommand',
-\   'callback': 'ale_linters#perl#perl#Handle',
+\   'name':                'perl',
+\   'executable_callback': { buffer -> ale#linter#util#GetBufExec(buffer, s:linter) },
+\   'command_callback':    { buffer -> ale#linter#util#GetCommand(buffer, s:linter) },
+\   'output_stream':       'both',
+\   'callback':            'ale_linters#perl#perl#Handle',
 \})
