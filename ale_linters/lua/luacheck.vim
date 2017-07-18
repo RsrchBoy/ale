@@ -1,15 +1,9 @@
 " Author: Sol Bekic https://github.com/s-ol
 " Description: luacheck linter for lua files
 
-let g:ale_lua_luacheck_executable =
-\   get(g:, 'ale_lua_luacheck_executable', 'luacheck')
+let s:linter = 'lua_luacheck'
 
-let g:ale_lua_luacheck_options =
-\   get(g:, 'ale_lua_luacheck_options', '')
-
-function! ale_linters#lua#luacheck#GetExecutable(buffer) abort
-    return ale#Var(a:buffer, 'lua_luacheck_executable')
-endfunction
+call ale#linter#util#SetStandardVars(s:linter, 'luacheck', '')
 
 function! ale_linters#lua#luacheck#GetCommand(buffer) abort
     return ale#Escape(ale_linters#lua#luacheck#GetExecutable(a:buffer))
@@ -39,7 +33,7 @@ endfunction
 
 call ale#linter#Define('lua', {
 \   'name': 'luacheck',
-\   'executable_callback': 'ale_linters#lua#luacheck#GetExecutable',
+\   'executable_callback': { buffer -> ale#Var(buffer, s:linter.'_executable') },
 \   'command_callback': 'ale_linters#lua#luacheck#GetCommand',
 \   'callback': 'ale_linters#lua#luacheck#Handle',
 \})

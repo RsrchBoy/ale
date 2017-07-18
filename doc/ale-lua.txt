@@ -10,7 +10,23 @@ g:ale_lua_luacheck_executable                   *g:ale_lua_luacheck_executable*
   Type: |String|
   Default: `'luacheck'`
 
-  This variable can be changed to change the path to luacheck.
+  See |g:ale_{ft}_{name}_executable|.
+
+
+g:ale_lua_luacheck_use_docker                   *g:ale_lua_luacheck_use_docker*
+                                                *b:ale_lua_luacheck_use_docker*
+  Type: |String|
+  Default: `'never'`
+
+  See |g:ale_{ft}_{name}_use_docker|.
+
+
+g:ale_lua_luacheck_docker_image               *g:ale_lua_luacheck_docker_image*
+                                              *b:ale_lua_luacheck_docker_image*
+  Type: |String|
+  Default: `''`
+
+  See |g:ale_{ft}_{name}_docker_image|.
 
 
 g:ale_lua_luacheck_options                         *g:ale_lua_luacheck_options*
@@ -18,7 +34,7 @@ g:ale_lua_luacheck_options                         *g:ale_lua_luacheck_options*
   Type: |String|
   Default: `''`
 
-  This variable can be set to pass additional options to luacheck.
+  See |g:ale_{ft}_{name}_options|.
 
 
 ===============================================================================
