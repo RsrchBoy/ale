@@ -3,7 +3,7 @@ ALE SQL Integration                                           *ale-sql-options*
 
 
 ===============================================================================
-help                                                           *ale-sql-sqlint*
+sqlint                                                         *ale-sql-sqlint*
 
 g:ale_sql_sqlint_executable                       *g:ale_sql_sqlint_executable*
                                                   *b:ale_sql_sqlint_executable*
