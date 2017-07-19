@@ -1,20 +1,8 @@
 " Author: KabbAmine <amine.kabb@gmail.com>
 
-let g:ale_yaml_yamllint_executable =
-\   get(g:, 'ale_yaml_yamllint_executable', 'yamllint')
-
-let g:ale_yaml_yamllint_options =
-\   get(g:, 'ale_yaml_yamllint_options', '')
-
-function! ale_linters#yaml#yamllint#GetExecutable(buffer) abort
-    return ale#Var(a:buffer, 'yaml_yamllint_executable')
-endfunction
-
-function! ale_linters#yaml#yamllint#GetCommand(buffer) abort
-    return ale_linters#yaml#yamllint#GetExecutable(a:buffer)
-    \   . ' ' . ale#Var(a:buffer, 'yaml_yamllint_options')
-    \   . ' -f parsable %t'
-endfunction
+let s:linter = 'yaml_yamllint'
+call ale#Set(s:linter.'_options', '-f parsable')
+call ale#linter#util#SetStandardVars(s:linter, 'yamllint', '')
 
 function! ale_linters#yaml#yamllint#Handle(buffer, lines) abort
     " Matches patterns line the following:
@@ -42,7 +30,7 @@ endfunction
 
 call ale#linter#Define('yaml', {
 \   'name': 'yamllint',
-\   'executable_callback': 'ale_linters#yaml#yamllint#GetExecutable',
-\   'command_callback': 'ale_linters#yaml#yamllint#GetCommand',
+\   'executable_callback': { buffer -> ale#linter#util#GetBufExec(buffer, s:linter) },
+\   'command_callback':    { buffer -> ale#linter#util#GetCommand(buffer, s:linter) },
 \   'callback': 'ale_linters#yaml#yamllint#Handle',
 \})

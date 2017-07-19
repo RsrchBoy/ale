@@ -63,15 +63,31 @@ g:ale_yaml_yamllint_executable                 *g:ale_yaml_yamllint_executable*
   Type: |String|
   Default: `'yamllint'`
 
-  This variable can be set to change the path to yamllint.
+  See |g:ale_{ft}_{name}_executable|.
+
+
+g:ale_yaml_yamllint_use_docker                 *g:ale_yaml_yamllint_use_docker*
+                                               *b:ale_yaml_yamllint_use_docker*
+  Type: |String|
+  Default: `'never'`
+
+  See |g:ale_{ft}_{name}_use_docker|.
+
+
+g:ale_yaml_yamllint_docker_image             *g:ale_yaml_yamllint_docker_image*
+                                             *b:ale_yaml_yamllint_docker_image*
+  Type: |String|
+  Default: `''`
+
+  See |g:ale_{ft}_{name}_docker_image|.
 
 
 g:ale_yaml_yamllint_options                       *g:ale_yaml_yamllint_options*
                                                   *b:ale_yaml_yamllint_options*
   Type: |String|
-  Default: `''`
+  Default: `'-f parsable'`
 
-  This variable can be set to pass additional options to yamllint.
+  See |g:ale_{ft}_{name}_options|.
 
 
 ===============================================================================
