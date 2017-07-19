@@ -243,7 +243,7 @@ The following languages and tools are supported.
 2.1. Linters via Docker                                    *ale-support-docker*
 
 If a particular linter is unavailable on your system, Ale has experimental
-support for running certain linters via Docker.  For each linter with such
+support for running certain linters via Docker. For each linter with such
 support, a `g:ale_{ft}_{linter}_docker_image` variable image will exist, and
 can be used to configure which docker image is used to perform the linting.
 
@@ -296,9 +296,9 @@ g:ale_docker_allow                                         *g:ale_docker_allow*
   Type: |Number|
   Default: `'0'`
 
-  This option controls, globally, if docker may be used to run linters.  This
+  This option controls, globally, if docker may be used to run linters. This
   is an override: when set to `'0'`, docker will never be used, regardless of
-  the individual "use docker" settings per linter / buffer.  When set to
+  the individual "use docker" settings per linter / buffer. When set to
   `'1'`("truthy"), the linters may run via docker, if so configured to do so.
 
   See |ale-docker| for more information about running linters via docker; see
