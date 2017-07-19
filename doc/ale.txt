@@ -48,6 +48,8 @@ CONTENTS                                                         *ale-contents*
       ember-template-lint.................|ale-handlebars-embertemplatelint|
     haskell...............................|ale-haskell-options|
       stack-build.........................|ale-haskell-stack-build|
+    help..................................|ale-help-options|
+      proselint...........................|ale-help-proselint|
     html..................................|ale-html-options|
       htmlhint............................|ale-html-htmlhint|
       tidy................................|ale-html-tidy|
@@ -67,6 +69,8 @@ CONTENTS                                                         *ale-contents*
       kotlinc.............................|ale-kotlin-kotlinc|
     lua...................................|ale-lua-options|
       luacheck............................|ale-lua-luacheck|
+    mail..................................|ale-mail-options|
+      proselint...........................|ale-mail-proselint|
     objc..................................|ale-objc-options|
       clang...............................|ale-objc-clang|
     objcpp................................|ale-objcpp-options|
@@ -195,6 +199,7 @@ The following languages and tools are supported.
 * Kotlin: 'kotlinc'
 * LaTeX (tex): 'chktex', 'lacheck', 'proselint'
 * Lua: 'luacheck'
+* Mail: 'proselint'
 * Markdown: 'mdl', 'proselint', 'vale'
 * MATLAB: 'mlint'
 * nim: 'nim check'

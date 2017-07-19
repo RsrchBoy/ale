@@ -90,6 +90,7 @@ name. That seems to be the fairest way to arrange this table.
 | Kotlin | [kotlinc](https://kotlinlang.org), [ktlint](https://ktlint.github.io) see `:help ale-integration-kotlin` for configuration instructions
 | LaTeX | [chktex](http://www.nongnu.org/chktex/), [lacheck](https://www.ctan.org/pkg/lacheck), [proselint](http://proselint.com/) |
 | Lua | [luacheck](https://github.com/mpeterv/luacheck) |
+| Mail | [proselint](http://proselint.com/)|
 | Markdown | [mdl](https://github.com/mivok/markdownlint), [proselint](http://proselint.com/), [vale](https://github.com/ValeLint/vale) |
 | MATLAB | [mlint](https://www.mathworks.com/help/matlab/ref/mlint.html) |
 | Nim | [nim](https://nim-lang.org/docs/nimc.html) |
