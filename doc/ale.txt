@@ -992,12 +992,31 @@ ALEWarningSign                                                 *ALEWarningSign*
 -------------------------------------------------------------------------------
 3.2. "Standard" linter variables                *ale-standard-linter-variables*
 
-ALE linters are starting to use a standard set of variables to control their
-behaviour, most notably the executable used and any additional options to be
-passed. While not universally supported by all linters yet -- pull requests
-are quite welcome ;) -- these are being documented here to spare having
-multiple copies of this documentation copied (and recopied) between the
-linters.
+Some ALE linters use a standard set of variables to control their behaviour,
+most notably the executable used and any additional options to be passed.
+While not universally supported by all linters these are being documented here
+to spare having multiple copies of this documentation copied (and recopied)
+between the linters.
+
+Linters that honor these variables will have them documented in their
+linter-specific help.  See, e.g., |g:ale_vim_vint_executable|.
+
+
+g:ale_{ft}_{name}_executable                     *g:ale_{ft}_{name}_executable*
+                                                 *b:ale_{ft}_{name}_executable*
+  Type: |String|
+  Default: `depends on the linter`
+
+  This variable can be changed to modify the executable used for linting.
+
+
+g:ale_{ft}_{name}_options                           *g:ale_{ft}_{name}_options*
+                                                    *b:ale_{ft}_{name}_options*
+  Type: |String|
+  Default: `depends on the linter`
+
+  This variable can be changed to alter the command-line arguments used to
+  invoke the linter.
 
 
 g:ale_{ft}_{name}_use_docker                     *g:ale_{ft}_{name}_use_docker*
@@ -1020,23 +1039,6 @@ g:ale_{ft}_{name}_docker_image                 *g:ale_{ft}_{name}_docker_image*
 
   This variable controls the docker image used for this linter. An empty
   string means that docker will never be used for this linter.
-
-
-g:ale_{ft}_{name}_executable                     *g:ale_{ft}_{name}_executable*
-                                                 *b:ale_{ft}_{name}_executable*
-  Type: |String|
-  Default: `depends on the linter`
-
-  This variable can be changed to modify the executable used for linting.
-
-
-g:ale_{ft}_{name}_options                           *g:ale_{ft}_{name}_options*
-                                                    *b:ale_{ft}_{name}_options*
-  Type: |String|
-  Default: `depends on the linter`
-
-  This variable can be changed to alter the command-line arguments used to
-  invoke the linter.
 
 
 ===============================================================================
