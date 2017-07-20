@@ -23,7 +23,7 @@ function! ale#linter#util#GetBufExec(buffer, linter) abort
 
     " if override says 'nope!' or we don't have an image defined,
     " then just return
-    if !ale#Var(a:buffer, 'docker_allow') || !exists('g:ale_'.a:linter.'_docker_image') || ale#Var(a:linter.'_docker_image') ==# ''
+    if !ale#Var(a:buffer, 'docker_allow') || !exists('g:ale_'.a:linter.'_docker_image') || ale#Var(a:buffer, a:linter.'_docker_image') ==# ''
         return l:other_cmd
     endif
 
