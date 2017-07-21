@@ -379,7 +379,8 @@ function! s:RunJob(options) abort
         return 0
     endif
 
-    let [l:temporary_file, l:command] = ale#command#FormatCommand(l:buffer, l:command, l:read_buffer)
+    let [l:temporary_file, l:command, l:run_id]
+    \ = ale#command#FormatCommand(l:buffer, l:command, l:read_buffer)
 
     if s:CreateTemporaryFileForJob(l:buffer, l:temporary_file)
         " If a temporary filename has been formatted in to the command, then
@@ -401,6 +402,7 @@ function! s:RunJob(options) abort
     let l:job_options = {
     \   'mode': 'nl',
     \   'exit_cb': function('s:HandleExit'),
+    \   'run_id': l:run_id,
     \}
 
     if l:output_stream ==# 'stderr'

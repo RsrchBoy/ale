@@ -16,13 +16,23 @@ function! s:TemporaryFilename(buffer) abort
     return tempname() . (has('win32') ? '\' : '/') . l:filename
 endfunction
 
+let s:next_id = 1
+function! s:Id() abort
+    " no '++' operator?!  le sigh
+    let l:id = s:next_id
+    let s:next_id += 1
+    return l:id
+endfunction
+
 " Given a command string, replace every...
 " %s -> with the current filename
 " %t -> with the name of an unused file in a temporary directory
+" %i -> with a unique id
 " %% -> with a literal %
 function! ale#command#FormatCommand(buffer, command, pipe_file_if_needed) abort
     let l:temporary_file = ''
     let l:command = a:command
+    let l:id = s:Id()
 
     " First replace all uses of %%, used for literal percent characters,
     " with an ugly string.
@@ -42,6 +52,10 @@ function! ale#command#FormatCommand(buffer, command, pipe_file_if_needed) abort
         let l:command = substitute(l:command, '%t', '\=ale#Escape(l:temporary_file)', 'g')
     endif
 
+    if l:command =~# '%i'
+        let l:command = substitute(l:command, '%i', l:id, 'g')
+    endif
+
     " Finish formatting so %% becomes %.
     let l:command = substitute(l:command, '<<PERCENTS>>', '%', 'g')
 
@@ -53,5 +67,5 @@ function! ale#command#FormatCommand(buffer, command, pipe_file_if_needed) abort
         let l:command = l:command . ' < ' . ale#Escape(l:temporary_file)
     endif
 
-    return [l:temporary_file, l:command]
+    return [l:temporary_file, l:command, l:id]
 endfunction
