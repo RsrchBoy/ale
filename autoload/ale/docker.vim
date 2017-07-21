@@ -19,8 +19,14 @@ function! ale#docker#PrepareRunCmd(buffer, linter_fullname, command) abort
     " Ensure the file is appropriately accessible.
     let l:volumes = a:command =~# '%t' ? ' -v %t:%t:ro ' : ''
 
+    let l:labels
+    \   = ' --label w0rp.ale.linter.run_id=%i '
+    \   . ' --label w0rp.ale.linter.buffer=' . a:buffer . ' '
+    \   . ' --label w0rp.ale.linter.linter=' . a:linter_fullname . ' '
+
     return 'docker '
     \   . ale#Var(a:buffer, 'docker_run_cmd') . ' --entrypoint="" '
+    \   . l:labels
     \   . l:volumes
     \   . ale#Var(a:buffer, a:linter_fullname.'_docker_image') . ' '
     \   . a:command
