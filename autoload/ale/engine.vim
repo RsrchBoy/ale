@@ -398,11 +398,17 @@ function! s:RunJob(options) abort
         endif
     endif
 
+    " killing a linter inside a container is different than other processes
+    let l:in_container = l:command =~# '^docker' ? 1 : 0
+    echom 'in_container: '.l:in_container.'; '.l:command
+
     let l:command = ale#job#PrepareCommand(l:command)
     let l:job_options = {
     \   'mode': 'nl',
     \   'exit_cb': function('s:HandleExit'),
     \   'run_id': l:run_id,
+    \   'in_container': l:in_container,
+    \   'buffer': l:buffer,
     \}
 
     if l:output_stream ==# 'stderr'

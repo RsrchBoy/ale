@@ -23,6 +23,66 @@ function! s:KillHandler(timer) abort
     call job_stop(l:job, 'kill')
 endfunction
 
+" this is largely cribbed from the function of the same name in ale#engine
+function! s:HandleExit(job_id, exit_code, buffer) abort
+
+    " FIXME TODO pass the killed job's info in -- a:job_id here is the job we
+    " just ran to kill the container
+
+    if g:ale_history_enabled
+        call ale#history#SetExitCode(a:buffer, a:job_id, a:exit_code)
+    endif
+
+    " Remove this job from the list.
+    call ale#job#Stop(a:job_id)
+    call remove(s:job_map, a:job_id)
+    call filter(g:ale_buffer_info[a:buffer].job_list, 'v:val !=# a:job_id')
+
+    " Stop here if we land in the handle for a job completing if we're in
+    " a sandbox.
+    if ale#util#InSandbox()
+        return
+    endif
+
+    if has('nvim') && !empty(l:output) && empty(l:output[-1])
+        call remove(l:output, -1)
+    endif
+
+    " Log the output of the command for ALEInfo if we should.
+    if g:ale_history_enabled && g:ale_history_log_output
+        " call ale#history#RememberOutput(a:buffer, a:job_id, l:output[:])
+        call ale#history#RememberOutput(a:buffer, a:job_id, '')
+    endif
+
+endfunction
+
+function! s:KillContainer(job, job_id) abort
+    echom 'in s:KillContainer() for run_id: '.a:job.run_id
+
+    let l:command
+    \   = 'docker ps'
+    \   .   ' --filter label=w0rp.ale.linter.run_id=' . a:job.run_id
+    \   .   ' --filter status=running'
+    \   .   ' --format ''{{.ID}}'' '
+
+    let l:command = 'docker kill `'.l:command.'`'
+
+    echom 'Killing off old container with: ' . l:command
+    let l:command = ale#job#PrepareCommand(l:command)
+
+    let l:job_options = {
+    \   'mode': 'nl',
+    \   'exit_cb': { job_id, exit -> s:HandleExit(job_id, exit, a:job.buffer) },
+    \   'in_container': 0,
+    \   'buffer': a:job.buffer
+    \}
+
+    let l:job_id = ale#job#Start(l:command, l:job_options)
+
+    echom '...returned id: ' . l:job_id
+    return l:job_id
+endfunction
+
 " Note that jobs and IDs are the same thing on NeoVim.
 function! ale#job#JoinNeovimOutput(job, last_line, data, mode, callback) abort
     let l:lines = a:data[:-2]
@@ -287,12 +347,15 @@ function! ale#job#Stop(job_id) abort
     endif
 
     if has('nvim')
+        " FIXME TODO handle killing containers
+
         " FIXME: NeoVim kills jobs on a timer, but will not kill any processes
         " which are child processes on Unix. Some work needs to be done to
         " kill child processes to stop long-running processes like pylint.
         call jobstop(a:job_id)
     else
-        let l:job = s:job_map[a:job_id].job
+        let l:job_info = s:job_map[a:job_id]
+        let l:job = l:job_info.job
 
         " We must close the channel for reading the buffer if it is open
         " when stopping a job. Otherwise, we will get errors in the status line.
@@ -300,17 +363,27 @@ function! ale#job#Stop(job_id) abort
             call ch_close_in(job_getchannel(l:job))
         endif
 
-        " Ask nicely for the job to stop.
-        call job_stop(l:job)
+        if !l:job_info.in_container
 
-        if ale#job#IsRunning(l:job)
-            " Set a 100ms delay for killing the job with SIGKILL.
-            " FIXME make this docker specific: bump the kill timer to 400ms
-            " (seems to take 200-300 ms to actually terminate; SIGKILL can't
-            " be proxied, so killing the docker client just leaves old
-            " containers kicking around, despite '--rm' (that's handled by the
-            " client in interactive runs)
-            let s:job_kill_timers[timer_start(400, function('s:KillHandler'))] = l:job
+            " 'so, um, process, would you like die already OK?'
+            call job_stop(l:job)
+
+            if ale#job#IsRunning(a:job_id)
+                " Set a 100ms delay for killing the job with SIGKILL.
+                let s:job_kill_timers[timer_start(100, function('s:KillHandler'))] = l:job
+            endif
+        else
+            " Why not just SIGKILL it?
+            "
+            " Sending SIGKILL to the docker client process is pointless
+            " and harmful: it cannot proxy SIGKILL to the contained
+            " process, and forcibly terminating the client may leave
+            " partially destroyed containers kicking around.  (The client
+            " handles container removal with 'docker run --rm', among other
+            " things.)
+
+            call s:KillContainer(l:job_info, a:job_id)
+
         endif
     endif
 endfunction
