@@ -21,7 +21,7 @@ function! s:Id() abort
     " no '++' operator?!  le sigh
     let l:id = s:next_id
     let s:next_id += 1
-    return l:id
+    return l:id.'-'.localtime()
 endfunction
 
 " Given a command string, replace every...
