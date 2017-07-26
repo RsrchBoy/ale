@@ -400,7 +400,7 @@ function! s:RunJob(options) abort
 
     " killing a linter inside a container is different than other processes
     let l:in_container = l:command =~# '^docker' ? 1 : 0
-    echom 'in_container: '.l:in_container.'; '.l:command
+    " echom 'in_container: '.l:in_container.'; '.l:command
 
     let l:command = ale#job#PrepareCommand(l:command)
     let l:job_options = {
@@ -551,8 +551,16 @@ function! s:StopCurrentJobs(buffer, include_lint_file_jobs) abort
 
         if !empty(l:job_info)
             if a:include_lint_file_jobs || !l:job_info.linter.lint_file
+                " echom 'in s:StopCurrentJobs() -- job_id: ' . l:job_id
+                " :PPmsg l:job_info
+                " let l:map = s:job_info_map
+                " :PPmsg l:map
                 call ale#job#Stop(l:job_id)
-                call remove(s:job_info_map, l:job_id)
+
+                " `docker kill` jobs won't have an entry here
+                if has_key(s:job_info_map, l:job_id)
+                    call remove(s:job_info_map, l:job_id)
+                endif
             else
                 call add(l:new_job_list, l:job_id)
             endif

@@ -57,7 +57,7 @@ function! s:HandleExit(job_id, exit_code, buffer) abort
 endfunction
 
 function! s:KillContainer(job, job_id) abort
-    echom 'in s:KillContainer() for run_id: '.a:job.run_id
+    " echom 'in s:KillContainer() for run_id: '.a:job.run_id
 
     let l:command
     \   = 'docker ps'
@@ -67,7 +67,7 @@ function! s:KillContainer(job, job_id) abort
 
     let l:command = 'docker kill `'.l:command.'`'
 
-    echom 'Killing off old container with: ' . l:command
+    " echom 'Killing off old container with: ' . l:command
     let l:command = ale#job#PrepareCommand(l:command)
 
     let l:job_options = {
@@ -79,7 +79,7 @@ function! s:KillContainer(job, job_id) abort
 
     let l:job_id = ale#job#Start(l:command, l:job_options)
 
-    echom '...returned id: ' . l:job_id
+    " echom '...returned id: ' . l:job_id
     return l:job_id
 endfunction
 
