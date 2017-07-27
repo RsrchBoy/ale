@@ -13,7 +13,7 @@ RED='\033[0;31m'
 GREEN='\033[0;32m'
 NC='\033[0m'
 CURRENT_IMAGE_ID=d5a1b5915b09
-IMAGE=w0rp/ale
+IMAGE=lintersofdoom/ale-testbed
 DOCKER_FLAGS=(--rm -v "$PWD:/testplugin" -v "$PWD/test:/home" -w /testplugin "$IMAGE")
 EXIT=0
 
