@@ -16,7 +16,7 @@ g:ale_nroff_proselint_executable             *g:ale_nroff_proselint_executable*
 g:ale_nroff_proselint_use_docker             *g:ale_nroff_proselint_use_docker*
                                              *b:ale_nroff_proselint_use_docker*
   Type: |String|
-  Default: `'never'`
+
 
   See |g:ale_{ft}_{name}_use_docker|.
 

@@ -31,7 +31,7 @@ g:ale_sh_shellcheck_executable                 *g:ale_sh_shellcheck_executable*
 g:ale_sh_shellcheck_use_docker                 *g:ale_sh_shellcheck_use_docker*
                                                *b:ale_sh_shellcheck_use_docker*
   Type: |String|
-  Default: `'never'`
+
 
   See |g:ale_{ft}_{name}_use_docker|.
 

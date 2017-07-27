@@ -76,7 +76,7 @@ proselint                                                  *ale-perl-proselint*
 g:ale_perl_proselint_use_docker               *g:ale_perl_proselint_use_docker*
                                               *b:ale_perl_proselint_use_docker*
   Type: |String|
-  Default: `'never'`
+
 
   This variable controls if the proselint linter is run inside a container,
   via docker.  If the value is:
