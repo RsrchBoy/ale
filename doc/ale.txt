@@ -294,16 +294,12 @@ g:ale_change_sign_column_color                 *g:ale_change_sign_column_color*
 g:ale_docker_allow                                         *g:ale_docker_allow*
                                                            *b:ale_docker_allow*
   Type: |Number|
-  Default: `'0'`
+  Default: `1`
 
   This option controls, globally, if docker may be used to run linters. This
-  is an override: when set to `'0'`, docker will never be used, regardless of
-  the individual "use docker" settings per linter / buffer. When set to
-  `'1'`("truthy"), the linters may run via docker, if so configured to do so.
-
-  See |ale-docker| for more information about running linters via docker; see
-  |ale-docker-linter-options| for more information about configuration common
-  to each docker-enabled linter.
+  is an override: when set to `0`, docker will never be used, regardless of
+  the individual "use docker" settings per linter / buffer. When set to `1`,
+  the linters may run via docker, if so configured to do so.
 
 
 g:ale_echo_cursor                                           *g:ale_echo_cursor*
