@@ -6,14 +6,22 @@ After:
   unlet! g:result
   unlet! g:match
 
+Execute(FormatCommand returns three elements):
+  let b:returned = ale#command#FormatCommand(bufnr('%'), 'awesome-linter do something', 0)
+  AssertEqual 3, len(b:returned)
+
 Execute(FormatCommand should do nothing to basic command strings):
-  AssertEqual ['', 'awesome-linter do something'], ale#command#FormatCommand(bufnr('%'), 'awesome-linter do something', 0)
+  let b:returned = ale#command#FormatCommand(bufnr('%'), 'awesome-linter do something', 0)
+
+  AssertEqual 'awesome-linter do something', b:returned[1]
 
 Execute(FormatCommand should handle %%, and ignore other percents):
-  AssertEqual ['', '% %%d %%f %x %'], ale#command#FormatCommand(bufnr('%'), '%% %%%d %%%f %x %', 0)
+  let b:returned = ale#command#FormatCommand(bufnr('%'), '%% %%%d %%%f %x %', 0)
+  AssertEqual '% %%d %%f %x %', b:returned[1]
 
 Execute(FormatCommand should convert %s to the current filename):
-  AssertEqual ['', 'foo ' . shellescape(expand('%:p')) . ' bar ' . shellescape(expand('%:p'))], ale#command#FormatCommand(bufnr('%'), 'foo %s bar %s', 0)
+  let b:returned = ale#command#FormatCommand(bufnr('%'), 'foo %s bar %s', 0)
+  AssertEqual 'foo ' . shellescape(expand('%:p')) . ' bar ' . shellescape(expand('%:p')), b:returned[1]
 
 Execute(FormatCommand should convert %t to a new temporary filename):
   let g:result = ale#command#FormatCommand(bufnr('%'), 'foo %t bar %t', 0)
