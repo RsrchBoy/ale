@@ -1,8 +1,9 @@
 Before:
   Save g:ale_warn_about_trailing_whitespace
   Save g:ale_linters
+  Save g:ale_fixers
   Save g:ale_docker_allow
-  let g:ale_docker_allow = 0
+  let g:ale_docker_allow = 1
 
   let g:ale_warn_about_trailing_whitespace = 1
 
@@ -12,13 +13,13 @@ Before:
   call ale#linter#Reset()
   let g:ale_linters = {}
   let g:ale_linter_aliases = {}
+  let g:ale_fixers = {}
   let g:ale_buffer_info = {}
   let g:globals_lines = [
   \  ' Global Variables:',
   \  '',
-  \  'let g:ale_docker_allow = 0',
-  \  'let g:ale_docker_executable = ''docker''',
-  \  'let g:ale_docker_run_cmd = ''run --rm -i'''.
+  \  'let g:ale_docker_allow = 1',
+  \  'let g:ale_docker_run_cmd = ''run --rm -i''',
   \  'let g:ale_echo_cursor = 1',
   \  'let g:ale_echo_msg_error_str = ''Error''',
   \  'let g:ale_echo_msg_format = ''%s''',
