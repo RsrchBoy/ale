@@ -77,7 +77,7 @@ g:ale_yaml_yamllint_use_docker                 *g:ale_yaml_yamllint_use_docker*
 g:ale_yaml_yamllint_docker_image             *g:ale_yaml_yamllint_docker_image*
                                              *b:ale_yaml_yamllint_docker_image*
   Type: |String|
-  Default: `''`
+  Default: `'lintersofdoom/yamllint:latest'`
 
   See |g:ale_{ft}_{name}_docker_image|.
 

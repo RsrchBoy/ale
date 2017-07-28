@@ -2,7 +2,7 @@
 
 let s:linter = 'yaml_yamllint'
 call ale#Set(s:linter.'_options', '-f parsable')
-call ale#linter#util#SetStandardVars(s:linter, 'yamllint', '')
+call ale#linter#util#SetStandardVars(s:linter, 'yamllint', 'lintersofdoom/yamllint:latest')
 
 function! ale_linters#yaml#yamllint#Handle(buffer, lines) abort
     " Matches patterns line the following:
