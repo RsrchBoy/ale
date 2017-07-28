@@ -1,5 +1,9 @@
 " Author: KabbAmine <amine.kabb@gmail.com>
 
+let s:linter = 'json_jsonlint'
+call ale#Set(s:linter.'_options', '--compact')
+call ale#linter#util#SetStandardVars(s:linter, 'jsonlint', 'papakpmartin/jsonlint:latest')
+
 function! ale_linters#json#jsonlint#Handle(buffer, lines) abort
     " Matches patterns like the following:
     " line 2, col 15, found: 'STRING' - expected: 'EOF', '}', ',', ']'.
@@ -19,9 +23,9 @@ function! ale_linters#json#jsonlint#Handle(buffer, lines) abort
 endfunction
 
 call ale#linter#Define('json', {
-\   'name': 'jsonlint',
-\   'executable': 'jsonlint',
-\   'output_stream': 'stderr',
-\   'command': 'jsonlint --compact -',
-\   'callback': 'ale_linters#json#jsonlint#Handle',
+\   'name':                'jsonlint',
+\   'output_stream':       'stderr',
+\   'executable_callback': { buffer -> ale#linter#util#GetBufExec(buffer, s:linter) },
+\   'command_callback':    { buffer -> ale#linter#util#GetCommand(buffer, s:linter) },
+\   'callback':            'ale_linters#json#jsonlint#Handle',
 \})

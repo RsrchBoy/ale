@@ -1,0 +1,40 @@
+===============================================================================
+ALE JSON Integration                                         *ale-json-options*
+
+
+===============================================================================
+json                                                        *ale-json-jsonlint*
+
+g:ale_json_jsonlint_executable                 *g:ale_json_jsonlint_executable*
+                                               *b:ale_json_jsonlint_executable*
+  Type: |String|
+  Default: `'jsonlint'`
+
+  See |g:ale_{ft}_{name}_executable|.
+
+
+g:ale_json_jsonlint_use_docker                 *g:ale_json_jsonlint_use_docker*
+                                               *b:ale_json_jsonlint_use_docker*
+  Type: |String|
+
+  See |g:ale_{ft}_{name}_use_docker|.
+
+
+g:ale_json_jsonlint_docker_image             *g:ale_json_jsonlint_docker_image*
+                                             *b:ale_json_jsonlint_docker_image*
+  Type: |String|
+  Default: `'papakpmartin/jsonlint:latest'`
+
+  See |g:ale_{ft}_{name}_docker_image|.
+
+
+g:ale_json_jsonlint_options                       *g:ale_json_jsonlint_options*
+                                                  *b:ale_json_jsonlint_options*
+  Type: |String|
+  Default: `''`
+
+  See |g:ale_{ft}_{name}_options|.
+
+
+===============================================================================
+  vim:tw=78:ts=2:sts=2:sw=2:ft=help:norl:
