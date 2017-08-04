@@ -3,7 +3,7 @@ ALE Help Integration                                         *ale-help-options*
 
 
 ===============================================================================
-help                                                       *ale-help-proselint*
+proselint                                                  *ale-help-proselint*
 
 g:ale_help_proselint_executable               *g:ale_help_proselint_executable*
                                               *b:ale_help_proselint_executable*
@@ -16,7 +16,6 @@ g:ale_help_proselint_executable               *g:ale_help_proselint_executable*
 g:ale_help_proselint_use_docker               *g:ale_help_proselint_use_docker*
                                               *b:ale_help_proselint_use_docker*
   Type: |String|
-
 
   See |g:ale_{ft}_{name}_use_docker|.
 
