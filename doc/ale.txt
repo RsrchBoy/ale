@@ -73,6 +73,8 @@ CONTENTS                                                         *ale-contents*
       proselint...........................|ale-mail-proselint|
     notes.................................|ale-notes-options|
       proselint...........................|ale-notes-proselint|
+    nroff.................................|ale-nroff-options|
+      proselint...........................|ale-nroff-proselint|
     objc..................................|ale-objc-options|
       clang...............................|ale-objc-clang|
     objcpp................................|ale-objcpp-options|
