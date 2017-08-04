@@ -6,8 +6,9 @@
 "   g:ale_{ft}_{name}_use_docker       # always, never, yes
 "   g:ale_{ft}_{name}_docker_image     # the linter's image
 "   g:ale_{ft}_{name}_executable       # the non-docker executable name
-"
+"   g:ale_{ft}_{name}_options          # any options passed to the executable
 
+" Deprecated: true
 function! ale#docker#RunCmd(buffer, linter_fullname) abort
     return 'docker '
     \   . ale#Var(a:buffer, 'docker_run_cmd') . ' '
