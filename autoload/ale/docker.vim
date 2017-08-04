@@ -15,6 +15,12 @@ function! ale#docker#RunCmd(buffer, linter_fullname) abort
     \   . ale#Var(a:buffer, a:linter_fullname . '_docker_image')
 endfunction
 
+" Returns a list of all images -- global, and only those loaded at the moment.
+function! ale#docker#GetAllImages()
+    let l:globals = filter(keys(g:), { i, v -> v =~ '\v^ale_.+_docker_image$' })
+    return uniq(sort(map(l:globals, { k, v -> get(g:, v) })))
+endfunction
+
 function! ale#docker#PrepareRunCmd(buffer, linter_fullname, command) abort
 
     " Ensure the file is appropriately accessible.
