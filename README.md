@@ -95,6 +95,7 @@ name. That seems to be the fairest way to arrange this table.
 | MATLAB | [mlint](https://www.mathworks.com/help/matlab/ref/mlint.html) |
 | Nim | [nim](https://nim-lang.org/docs/nimc.html) |
 | nix | [nix-instantiate](http://nixos.org/nix/manual/#sec-nix-instantiate) |
+| notes | [proselint](http://proselint.com/)|
 | nroff | [proselint](http://proselint.com/)|
 | Objective-C | [clang](http://clang.llvm.org/) |
 | Objective-C++ | [clang](http://clang.llvm.org/) |

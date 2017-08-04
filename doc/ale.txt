@@ -71,6 +71,8 @@ CONTENTS                                                         *ale-contents*
       luacheck............................|ale-lua-luacheck|
     mail..................................|ale-mail-options|
       proselint...........................|ale-mail-proselint|
+    notes.................................|ale-notes-options|
+      proselint...........................|ale-notes-proselint|
     objc..................................|ale-objc-options|
       clang...............................|ale-objc-clang|
     objcpp................................|ale-objcpp-options|
