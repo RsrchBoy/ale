@@ -33,7 +33,6 @@ function! ale_linters#dockerfile#hadolint#Handle(buffer, lines) abort
     return l:output
 endfunction
 
-
 call ale#linter#Define('dockerfile', {
 \   'name': 'hadolint',
 \   'executable_callback': { buffer -> ale#linter#util#GetBufExec(buffer, s:linter) },
