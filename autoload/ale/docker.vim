@@ -28,6 +28,7 @@ function! ale#docker#PrepareRunCmd(buffer, linter_fullname, command) abort
 
     let l:labels
     \   = ' --label w0rp.ale.linter.run_id=%i '
+    \   . ' --label w0rp.ale.linter.vim.pid=' . getpid() . ' '
     \   . ' --label w0rp.ale.linter.buffer=' . a:buffer . ' '
     \   . ' --label w0rp.ale.linter.linter=' . a:linter_fullname . ' '
 
