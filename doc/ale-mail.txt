@@ -1,0 +1,74 @@
+===============================================================================
+ALE mail Integration                                         *ale-mail-options*
+
+
+===============================================================================
+proselint                                                  *ale-mail-proselint*
+
+g:ale_mail_proselint_executable               *g:ale_mail_proselint_executable*
+                                              *b:ale_mail_proselint_executable*
+  Type: |String|
+  Default: `'proselint'`
+
+  See |g:ale_{ft}_{name}_executable|.
+
+
+g:ale_mail_proselint_use_docker               *g:ale_mail_proselint_use_docker*
+                                              *b:ale_mail_proselint_use_docker*
+  Type: |String|
+
+  See |g:ale_{ft}_{name}_use_docker|.
+
+
+g:ale_mail_proselint_docker_image           *g:ale_mail_proselint_docker_image*
+                                            *b:ale_mail_proselint_docker_image*
+  Type: |String|
+  Default: `'rsrchboy/proselint:latest'`
+
+  See |g:ale_{ft}_{name}_docker_image|.
+
+
+g:ale_mail_proselint_options                     *g:ale_mail_proselint_options*
+                                                 *b:ale_mail_proselint_options*
+  Type: |String|
+  Default: `''`
+
+  See |g:ale_{ft}_{name}_options|.
+
+
+===============================================================================
+vale                                                            *ale-mail-vale*
+
+g:ale_mail_vale_executable                         *g:ale_mail_vale_executable*
+                                                   *b:ale_mail_vale_executable*
+  Type: |String|
+  Default: `'vale'`
+
+  See |g:ale_{ft}_{name}_executable|.
+
+
+g:ale_mail_vale_use_docker                         *g:ale_mail_vale_use_docker*
+                                                   *b:ale_mail_vale_use_docker*
+  Type: |String|
+
+  See |g:ale_{ft}_{name}_use_docker|.
+
+
+g:ale_mail_vale_docker_image                     *g:ale_mail_vale_docker_image*
+                                                 *b:ale_mail_vale_docker_image*
+  Type: |String|
+  Default: `'rsrchboy/vale:latest'`
+
+  See |g:ale_{ft}_{name}_docker_image|.
+
+
+g:ale_mail_vale_options                               *g:ale_mail_vale_options*
+                                                      *b:ale_mail_vale_options*
+  Type: |String|
+  Default: `'--output=line'`
+
+  See |g:ale_{ft}_{name}_options|.
+
+
+===============================================================================
+  vim:tw=78:ts=2:sts=2:sw=2:ft=help:norl:
