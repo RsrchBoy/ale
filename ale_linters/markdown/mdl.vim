@@ -1,6 +1,9 @@
 " Author: Steve Dignam <steve@dignam.xyz>
 " Description: Support for mdl, a markdown linter
 
+let s:linter = 'markdown_mdl'
+call ale#linter#util#SetStandardVars(s:linter, 'mdl', 'rsrchboy/mdl:latest')
+
 function! ale_linters#markdown#mdl#Handle(buffer, lines) abort
     " matches: '(stdin):173: MD004 Unordered list style'
     let l:pattern = ':\(\d*\): \(.*\)$'
@@ -18,8 +21,8 @@ function! ale_linters#markdown#mdl#Handle(buffer, lines) abort
 endfunction
 
 call ale#linter#Define('markdown', {
-\   'name': 'mdl',
-\   'executable': 'mdl',
-\   'command': 'mdl',
-\   'callback': 'ale_linters#markdown#mdl#Handle'
+\   'name':                'mdl',
+\   'executable_callback': { buffer -> ale#linter#util#GetBufExec(buffer, s:linter) },
+\   'command_callback':    { buffer -> ale#linter#util#GetCommand(buffer, s:linter) },
+\   'callback':            'ale_linters#markdown#mdl#Handle'
 \})
