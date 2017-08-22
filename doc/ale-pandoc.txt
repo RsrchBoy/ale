@@ -3,7 +3,7 @@ ALE pandoc Integration                                     *ale-pandoc-options*
 
 
 ===============================================================================
-pandoc                                                   *ale-pandoc-proselint*
+proselint                                                *ale-pandoc-proselint*
 
 g:ale_pandoc_proselint_executable           *g:ale_pandoc_proselint_executable*
                                             *b:ale_pandoc_proselint_executable*
@@ -32,6 +32,40 @@ g:ale_pandoc_proselint_options                 *g:ale_pandoc_proselint_options*
                                                *b:ale_pandoc_proselint_options*
   Type: |String|
   Default: `''`
+
+  See |g:ale_{ft}_{name}_options|.
+
+
+===============================================================================
+vale                                                          *ale-pandoc-vale*
+
+g:ale_pandoc_vale_executable                     *g:ale_pandoc_vale_executable*
+                                                 *b:ale_pandoc_vale_executable*
+  Type: |String|
+  Default: `'vale'`
+
+  See |g:ale_{ft}_{name}_executable|.
+
+
+g:ale_pandoc_vale_use_docker                     *g:ale_pandoc_vale_use_docker*
+                                                 *b:ale_pandoc_vale_use_docker*
+  Type: |String|
+
+  See |g:ale_{ft}_{name}_use_docker|.
+
+
+g:ale_pandoc_vale_docker_image                 *g:ale_pandoc_vale_docker_image*
+                                               *b:ale_pandoc_vale_docker_image*
+  Type: |String|
+  Default: `'rsrchboy/vale:latest'`
+
+  See |g:ale_{ft}_{name}_docker_image|.
+
+
+g:ale_pandoc_vale_options                           *g:ale_pandoc_vale_options*
+                                                    *b:ale_pandoc_vale_options*
+  Type: |String|
+  Default: `'--output=line'`
 
   See |g:ale_{ft}_{name}_options|.
 
