@@ -17,7 +17,6 @@ g:ale_sql_sqlint_use_docker                       *g:ale_sql_sqlint_use_docker*
                                                   *b:ale_sql_sqlint_use_docker*
   Type: |String|
 
-
   See |g:ale_{ft}_{name}_use_docker|.
 
 
