@@ -61,7 +61,7 @@ function! s:KillContainer(job, job_id) abort
 
     let l:command
     \   = 'docker ps'
-    \   .   ' --filter label=w0rp.ale.linter.run_id=' . a:job.run_id
+    \   .   ' --filter label=ale.linter.run_id=' . a:job.run_id
     \   .   ' --filter status=running'
     \   .   ' --format ''{{.ID}}'' '
 
