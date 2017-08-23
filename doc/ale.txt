@@ -184,7 +184,7 @@ The following languages and tools are supported.
 
 * ASM: 'gcc'
 * Ansible: 'ansible-lint'
-* Asciidoc: 'proselint'
+* Asciidoc: 'proselint', 'vale'
 * Bash: 'shell' (-n flag), 'shellcheck'
 * Bourne Shell: 'shell' (-n flag), 'shellcheck'
 * C: 'cppcheck', 'gcc', 'clang'

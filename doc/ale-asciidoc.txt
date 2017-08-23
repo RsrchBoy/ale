@@ -17,7 +17,6 @@ g:ale_asciidoc_proselint_use_docker       *g:ale_asciidoc_proselint_use_docker*
                                           *b:ale_asciidoc_proselint_use_docker*
   Type: |String|
 
-
   See |g:ale_{ft}_{name}_use_docker|.
 
 
@@ -33,6 +32,40 @@ g:ale_asciidoc_proselint_options             *g:ale_asciidoc_proselint_options*
                                              *b:ale_asciidoc_proselint_options*
   Type: |String|
   Default: `''`
+
+  See |g:ale_{ft}_{name}_options|.
+
+
+===============================================================================
+vale                                                        *ale-asciidoc-vale*
+
+g:ale_asciidoc_vale_executable                 *g:ale_asciidoc_vale_executable*
+                                               *b:ale_asciidoc_vale_executable*
+  Type: |String|
+  Default: `'vale'`
+
+  See |g:ale_{ft}_{name}_executable|.
+
+
+g:ale_asciidoc_vale_use_docker                 *g:ale_asciidoc_vale_use_docker*
+                                               *b:ale_asciidoc_vale_use_docker*
+  Type: |String|
+
+  See |g:ale_{ft}_{name}_use_docker|.
+
+
+g:ale_asciidoc_vale_docker_image             *g:ale_asciidoc_vale_docker_image*
+                                             *b:ale_asciidoc_vale_docker_image*
+  Type: |String|
+  Default: `'rsrchboy/vale:latest'`
+
+  See |g:ale_{ft}_{name}_docker_image|.
+
+
+g:ale_asciidoc_vale_options                       *g:ale_asciidoc_vale_options*
+                                                  *b:ale_asciidoc_vale_options*
+  Type: |String|
+  Default: `'--output=line'`
 
   See |g:ale_{ft}_{name}_options|.
 
