@@ -1,23 +1,16 @@
 " Author: medains <https://github.com/medains>, ardis <https://github.com/ardisdreelath>
 " Description: phpstan for PHP files
 
-" Set to change the ruleset
-let g:ale_php_phpstan_executable = get(g:, 'ale_php_phpstan_executable', 'phpstan')
-let g:ale_php_phpstan_level = get(g:, 'ale_php_phpstan_level', '4')
+let s:linter = 'php_phpstan'
 
-function! ale_linters#php#phpstan#GetExecutable(buffer) abort
-    return ale#Var(a:buffer, 'php_phpstan_executable')
-endfunction
+" " Set to change the ruleset
+" let g:ale_php_phpstan_executable = get(g:, 'ale_php_phpstan_executable', 'phpstan')
+" let g:ale_php_phpstan_level = get(g:, 'ale_php_phpstan_level', '4')
 
-function! ale_linters#php#phpstan#GetCommand(buffer) abort
-    let l:executable = ale_linters#php#phpstan#GetExecutable(a:buffer)
-
-    return ale#Escape(l:executable)
-    \   . ' analyze -l'
-    \   . ale#Var(a:buffer, 'php_phpstan_level')
-    \   . ' --errorFormat raw'
-    \   . ' %s'
-endfunction
+" FIXME
+call ale#Set(s:linter.'_level', '4')
+call ale#Set(s:linter.'_options', ' analyze --errorFormat raw -l ' . g:ale_php_phpstan_level)
+call ale#linter#util#SetStandardVars(s:linter, 'phpstan', 'phpstan/phpstan:latest')
 
 function! ale_linters#php#phpstan#Handle(buffer, lines) abort
     " Matches against lines like the following:
@@ -39,8 +32,8 @@ function! ale_linters#php#phpstan#Handle(buffer, lines) abort
 endfunction
 
 call ale#linter#Define('php', {
-\   'name': 'phpstan',
-\   'executable_callback': 'ale_linters#php#phpstan#GetExecutable',
-\   'command_callback': 'ale_linters#php#phpstan#GetCommand',
-\   'callback': 'ale_linters#php#phpstan#Handle',
+\   'name':                'phpstan',
+\   'executable_callback': { buffer -> ale#linter#util#GetBufExec(buffer, s:linter) },
+\   'command_callback':    { buffer -> ale#linter#util#GetCommand(buffer, s:linter) },
+\   'callback':            'ale_linters#php#phpstan#Handle',
 \})
