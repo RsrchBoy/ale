@@ -17,6 +17,9 @@ CONTENTS                                                         *ale-contents*
   6. Integration Documentation............|ale-integrations|
     asm...................................|ale-asm-options|
       gcc.................................|ale-asm-gcc|
+    asciidoc..............................|ale-asciidoc-options|
+      proselint...........................|ale-asciidoc-proselint|
+      vale................................|ale-asciidoc-vale|
     c.....................................|ale-c-options|
       clang...............................|ale-c-clang|
       cppcheck............................|ale-c-cppcheck|
@@ -54,6 +57,7 @@ CONTENTS                                                         *ale-contents*
       stack-build.........................|ale-haskell-stack-build|
     help..................................|ale-help-options|
       proselint...........................|ale-help-proselint|
+      vale................................|ale-help-vale|
     html..................................|ale-html-options|
       htmlhint............................|ale-html-htmlhint|
       tidy................................|ale-html-tidy|
@@ -77,6 +81,7 @@ CONTENTS                                                         *ale-contents*
       luacheck............................|ale-lua-luacheck|
     mail..................................|ale-mail-options|
       proselint...........................|ale-mail-proselint|
+      vale................................|ale-mail-vale|
     notes.................................|ale-notes-options|
       proselint...........................|ale-notes-proselint|
     nroff.................................|ale-nroff-options|
