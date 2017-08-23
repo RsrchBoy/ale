@@ -250,7 +250,7 @@ The following languages and tools are supported.
 * TypeScript: 'eslint', 'tslint', 'tsserver', 'typecheck'
 * Verilog: 'iverilog', 'verilator'
 * Vim: 'vint'
-* Vim help: 'proselint'
+* Vim help: 'proselint', 'vale'
 * XHTML: 'proselint'
 * XML: 'xmllint'
 * YAML: 'swaglint', 'yamllint'

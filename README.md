@@ -132,7 +132,7 @@ name. That seems to be the fairest way to arrange this table.
 | TypeScript | [eslint](http://eslint.org/), [tslint](https://github.com/palantir/tslint), tsserver, typecheck |
 | Verilog | [iverilog](https://github.com/steveicarus/iverilog), [verilator](http://www.veripool.org/projects/verilator/wiki/Intro) |
 | Vim | [vint](https://github.com/Kuniwak/vint) |
-| Vim help^ | [proselint](http://proselint.com/)|
+| Vim help^ | [proselint](http://proselint.com/), [vale](https://github.com/ValeLint/vale) |
 | XHTML | [proselint](http://proselint.com/)|
 | XML | [xmllint](http://xmlsoft.org/xmllint.html/)|
 | YAML | [swaglint](https://github.com/byCedric/swaglint), [yamllint](https://yamllint.readthedocs.io/) |
