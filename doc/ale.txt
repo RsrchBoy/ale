@@ -8,7 +8,7 @@ CONTENTS                                                         *ale-contents*
 
   1. Introduction.........................|ale-introduction|
   2. Supported Languages & Tools..........|ale-support|
-    2.1 Linters via Docker................|ale-support-docker|
+    2.1 Containerized linters.............|ale-support-docker|
   3. Global Options.......................|ale-options|
     3.1 Highlights........................|ale-highlights|
     3.2 "Standard" linter variables.......|ale-standard-linter-variables|
@@ -257,22 +257,15 @@ The following languages and tools are supported.
 
 
 -------------------------------------------------------------------------------
-2.1. Linters via Docker                                    *ale-support-docker*
+2.1. Containerized linters                                 *ale-support-docker*
 
 If a particular linter is unavailable on your system, Ale has experimental
 support for running certain linters via Docker. For each linter with such
 support, a `g:ale_{ft}_{linter}_docker_image` variable image will exist, and
 can be used to configure which docker image is used to perform the linting.
 
-Supported linters are:
-
-* most 'proselint' linters
-* dockerfile: 'hadolint'
-* sh: 'shellcheck'
-* SQL: 'sqlint'
-* Vim: 'vint'
-
-All of these linters support the |ale-standard-linter-variables|.
+All linters capable of running in a container support the
+|ale-standard-linter-variables|.
 
 
 ===============================================================================
