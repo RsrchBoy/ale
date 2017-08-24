@@ -177,3 +177,20 @@ function! ale#path#FromURI(uri) abort
 
     return ale#uri#Decode(l:encoded_path)
 endfunction
+
+" Given a buffer, look for its likely root.
+"
+" Right now we're super lazy, and only check to see if fugitive thinks we're
+" in a git repository, and if so, return the working tree root as the project
+" root.
+"
+" Returns: directory path
+function! ale#path#ProjectRoot(buffer) abort
+
+    " use fugitive if we can
+    if getbufvar(a:buffer, 'git_dir', '') !=? ''
+        return fugitive#buffer(a:buffer).repo().tree()
+    endif
+
+    return fnamemodify(bufname(a:buffer), ':p:h')
+endfunction
