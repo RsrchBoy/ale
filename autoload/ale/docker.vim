@@ -23,8 +23,12 @@ endfunction
 
 function! ale#docker#PrepareRunCmd(buffer, linter_fullname, command) abort
 
-    " Ensure the file is appropriately accessible.
-    let l:volumes = a:command =~# '%t' ? ' -v %t:%t:ro ' : ''
+    " this could be smarter, but WFN
+    let l:root = ale#Escape(ale#path#ProjectRoot(a:buffer))
+
+    " Ensure the project and our temporary file is appropriately accessible.
+    let l:volumes  = ' -v '.l:root.':'.l:root.':ro '
+    let l:volumes .= ' -v %t:%s:ro '
 
     let l:labels
     \   = ' --label ale.linter.run_id=%i '

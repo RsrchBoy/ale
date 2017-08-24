@@ -85,12 +85,13 @@ function! ale#linter#util#ShouldUseDocker(buffer, linter) abort
 endfunction
 
 function! ale#linter#util#GetCommand(buffer, linter_name) abort
+    " let l:base_options = a:0 ? a:1 : '%t'
     let l:command = ale#Escape(ale#Var(a:buffer, a:linter_name.'_executable')) . ' '
-    \  . ale#Var(a:buffer, a:linter_name.'_options') . ' %t'
+    \  . ale#Var(a:buffer, a:linter_name.'_options')
     if ale#linter#util#ShouldUseDocker(a:buffer, a:linter_name)
-        return ale#docker#PrepareRunCmd(a:buffer, a:linter_name, l:command)
+        return ale#docker#PrepareRunCmd(a:buffer, a:linter_name, l:command.' %s')
     endif
-    return l:command
+    return l:command . ' %t'
 endfunction
 
 " function! ale#linter#util#Get
