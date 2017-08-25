@@ -65,8 +65,8 @@ name. That seems to be the fairest way to arrange this table.
 | Awk | [gawk](https://www.gnu.org/software/gawk/)|
 | Bash | [-n flag](https://www.gnu.org/software/bash/manual/bash.html#index-set), [shellcheck](https://www.shellcheck.net/) |
 | Bourne Shell | [-n flag](http://linux.die.net/man/1/sh), [shellcheck](https://www.shellcheck.net/) |
-| C | [cppcheck](http://cppcheck.sourceforge.net), [gcc](https://gcc.gnu.org/), [clang](http://clang.llvm.org/)|
-| C++ (filetype cpp) | [clang](http://clang.llvm.org/), [clangcheck](http://clang.llvm.org/docs/ClangCheck.html), [clangtidy](http://clang.llvm.org/extra/clang-tidy/), [cppcheck](http://cppcheck.sourceforge.net), [cpplint](https://github.com/google/styleguide/tree/gh-pages/cpplint), [gcc](https://gcc.gnu.org/)|
+| C | [cppcheck](http://cppcheck.sourceforge.net), [gcc](https://gcc.gnu.org/), [clang](http://clang.llvm.org/), [clang-format](https://clang.llvm.org/docs/ClangFormat.html)|
+| C++ (filetype cpp) | [clang](http://clang.llvm.org/), [clangcheck](http://clang.llvm.org/docs/ClangCheck.html), [clangtidy](http://clang.llvm.org/extra/clang-tidy/), [cppcheck](http://cppcheck.sourceforge.net), [cpplint](https://github.com/google/styleguide/tree/gh-pages/cpplint), [gcc](https://gcc.gnu.org/), [clang-format](https://clang.llvm.org/docs/ClangFormat.html)|
 | C# | [mcs](http://www.mono-project.com/docs/about-mono/languages/csharp/) |
 | Chef | [foodcritic](http://www.foodcritic.io/) |
 | CMake | [cmakelint](https://github.com/richq/cmake-lint) |
@@ -111,7 +111,7 @@ name. That seems to be the fairest way to arrange this table.
 | Pod | [proselint](http://proselint.com/)|
 | Pug | [pug-lint](https://github.com/pugjs/pug-lint) |
 | Puppet | [puppet](https://puppet.com), [puppet-lint](https://puppet-lint.com) |
-| Python | [autopep8](https://github.com/hhatto/autopep8), [flake8](http://flake8.pycqa.org/en/latest/), [isort](https://github.com/timothycrosley/isort), [mypy](http://mypy-lang.org/), [pylint](https://www.pylint.org/), [yapf](https://github.com/google/yapf) |
+| Python | [autopep8](https://github.com/hhatto/autopep8), [flake8](http://flake8.pycqa.org/en/latest/), [isort](https://github.com/timothycrosley/isort), [mypy](http://mypy-lang.org/), [pycodestyle](https://github.com/PyCQA/pycodestyle), [pylint](https://www.pylint.org/), [yapf](https://github.com/google/yapf) |
 | R | [lintr](https://github.com/jimhester/lintr) |
 | ReasonML | [merlin](https://github.com/the-lambda-church/merlin) see `:help ale-integration-reason-merlin` for configuration instructions
 | reStructuredText | [proselint](http://proselint.com/)|
