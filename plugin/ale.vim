@@ -382,6 +382,9 @@ augroup ALECleanupGroup
     autocmd!
     " Clean up buffers automatically when they are unloaded.
     autocmd BufUnload * call ale#engine#Cleanup(str2nr(expand('<abuf>')))
+
+    " kill any remaining linters
+    autocmd VimLeavePre * call ale#docker#KillAllJobs()
 augroup END
 
 " Backwards Compatibility
