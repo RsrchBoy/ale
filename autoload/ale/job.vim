@@ -56,7 +56,7 @@ function! s:HandleExit(job_id, exit_code, buffer) abort
 
 endfunction
 
-function! s:KillContainer(job, job_id) abort
+function! s:KillContainer(job) abort
     " echom 'in s:KillContainer() for run_id: '.a:job.run_id
 
     let l:command
@@ -382,7 +382,7 @@ function! ale#job#Stop(job_id) abort
             " handles container removal with 'docker run --rm', among other
             " things.)
 
-            call s:KillContainer(l:job_info, a:job_id)
+            call s:KillContainer(l:job_info)
 
         endif
     endif
