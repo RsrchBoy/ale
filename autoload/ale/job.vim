@@ -23,6 +23,11 @@ function! s:KillHandler(timer) abort
     call job_stop(l:job, 'kill')
 endfunction
 
+" FIXME TODO ...ugh.
+function! ale#job#HandleExit(job_id, exit_code, buffer) abort
+    call s:HandleExit(a:job_id, a:exit_code, a:buffer)
+endfunction
+
 " this is largely cribbed from the function of the same name in ale#engine
 function! s:HandleExit(job_id, exit_code, buffer) abort
 

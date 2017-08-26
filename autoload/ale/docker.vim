@@ -21,6 +21,33 @@ function! ale#docker#GetAllImages()
     return filter(uniq(sort(map(l:globals, { k, v -> get(g:, v) }))), { k, v -> v !=# '' })
 endfunction
 
+function! ale#docker#KillJob(job) abort
+    " echom 'in s:KillContainer() for run_id: '.a:job.run_id
+
+    let l:command
+    \   = 'docker ps'
+    \   .   ' --filter label=ale.linter.run_id=' . a:job.run_id
+    \   .   ' --filter status=running'
+    \   .   ' --format ''{{.ID}}'' '
+
+    let l:command = 'docker kill `'.l:command.'`'
+
+    " echom 'Killing off old container with: ' . l:command
+    let l:command = ale#job#PrepareCommand(l:command)
+
+    let l:job_options = {
+    \   'mode': 'nl',
+    \   'exit_cb': { job_id, exit -> ale#job#HandleExit(job_id, exit, a:job.buffer) },
+    \   'in_container': 0,
+    \   'buffer': a:job.buffer
+    \}
+
+    let l:job_id = ale#job#Start(l:command, l:job_options)
+
+    " echom '...returned id: ' . l:job_id
+    return l:job_id
+endfunction
+
 function! ale#docker#PrepareRunCmd(buffer, linter_fullname, command) abort
 
     " this could be smarter, but WFN
