@@ -24,6 +24,11 @@ function! s:LintOnEnter(buffer) abort
 endfunction
 
 function! ale#events#EnterEvent(buffer) abort
+    " Disable ale for this buffer if it's not editable -- e.g. an actual help
+    " buffer
+    if !&modifiable
+        let b:ale_enabled = 0
+    endif
     let l:filetype = getbufvar(a:buffer, '&filetype')
     call setbufvar(a:buffer, 'ale_original_filetype', l:filetype)
 

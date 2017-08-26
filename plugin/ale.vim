@@ -223,6 +223,8 @@ function! ALEInitAuGroups() abort
     augroup ALERunOnEnterGroup
         autocmd!
         if g:ale_enabled
+            au OptionSet modifiable :let b:ale_enabled = v:option_new
+
             " Handle everything that needs to happen when buffers are entered.
             autocmd BufEnter * call ale#events#EnterEvent(str2nr(expand('<abuf>')))
         endif
