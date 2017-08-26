@@ -15,6 +15,11 @@ function! ale#docker#RunCmd(buffer, linter_fullname) abort
     \   . ale#Var(a:buffer, a:linter_fullname . '_docker_image')
 endfunction
 
+" Kill all containers we've launched
+function! ale#docker#KillAllJobs()
+    silent! call system("/bin/sh -c 'docker ps --filter label=ale.vim.pid=" . getpid() . " | xargs docker rm --force'")
+endfunction
+
 " Returns a list of all images -- global, and only those loaded at the moment.
 function! ale#docker#GetAllImages()
     let l:globals = filter(keys(g:), { i, v -> v =~ '\v^ale_.+_docker_image$' })
@@ -58,8 +63,8 @@ function! ale#docker#PrepareRunCmd(buffer, linter_fullname, command) abort
     let l:volumes .= ' -v %t:%s:ro '
 
     let l:labels
-    \   = ' --label ale.linter.run_id=%i '
-    \   . ' --label ale.linter.vim.pid=' . getpid() . ' '
+    \   = ' --label ale.vim.pid=' . getpid() . ' '
+    \   . ' --label ale.linter.run_id=%i '
     \   . ' --label ale.linter.buffer=' . a:buffer . ' '
     \   . ' --label ale.linter.linter=' . a:linter_fullname . ' '
 
