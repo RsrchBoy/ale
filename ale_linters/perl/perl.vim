@@ -5,7 +5,7 @@ let s:linter = 'perl_perl'
 
 " FIXME need to bind-mount lib/ also
 call ale#Set('perl_perl_options', '-c -Mwarnings -Ilib')
-call ale#linter#util#SetStandardVars(s:linter, 'perl', 'rsrchboy/perl:alpine')
+call ale#linter#util#SetStandardVars(s:linter, 'perl', 'lintersofdoom/perl:latest')
 
 let s:begin_failed_skip_pattern = '\v' . join([
 \   '^Compilation failed in require',
