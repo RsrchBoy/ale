@@ -192,7 +192,7 @@ call ale#Set('completion_enabled', 0)
 call ale#Set('completion_delay', 100)
 call ale#Set('completion_max_suggestions', 50)
 
-" disable running things via docker globally
+" enable running things via docker globally
 call ale#Set('docker_allow', 1)
 call ale#Set('docker_run_cmd', 'run --rm -i')
 
