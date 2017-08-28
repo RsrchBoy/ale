@@ -50,6 +50,32 @@ function! ale_linters#vim#vint#GetCommand(buffer, version_output) abort
     return l:command
 endfunction
 
+let s:word_regex_list = [
+\   '\v^Undefined variable: ([^ ]+)',
+\   '\v^Make the scope explicit like ...([^ ]+). ',
+\   '\v^.*start with a capital or contain a colon: ([^ ]+)',
+\   '\v.*instead of .(\=[=~]).',
+\]
+
+function! ale_linters#vim#vint#Handle(buffer, lines) abort
+    let l:loclist = ale#handlers#gcc#HandleGCCFormat(a:buffer, a:lines)
+
+    for l:item in l:loclist
+        let l:match = []
+
+        for l:regex in s:word_regex_list
+            let l:match = matchlist(l:item.text, l:regex)
+
+            if !empty(l:match)
+                let l:item.end_col = l:item.col + len(l:match[1]) - 1
+                break
+            endif
+        endfor
+    endfor
+
+    return l:loclist
+endfunction
+
 call ale#linter#Define('vim', {
 \   'name': 'vint',
 \   'executable_callback': { buffer -> ale#linter#util#GetBufExec(buffer, s:linter) },
