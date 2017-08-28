@@ -13,16 +13,6 @@ let g:ale_sh_shellcheck_exclusions =
 
 call ale#linter#util#SetStandardVars(s:linter, 'shellcheck', 'rsrchboy/shellcheck:latest')
 
-function! ale_linters#sh#shellcheck#GetDockerCommand(buffer) abort
-    let l:exclude_option = ale#Var(a:buffer, 'sh_shellcheck_exclusions')
-
-    return ale_linters#sh#shellcheck#GetExecutable(a:buffer)
-    \   . ale#Var(a:buffer, 'docker_run_cmd') . ale#Var(a:buffer, 'sh_shellcheck_docker_image')
-    \   . ' ' . ale#Var(a:buffer, 'sh_shellcheck_options')
-    \   . ' ' . (!empty(l:exclude_option) ? '-e ' . l:exclude_option : '')
-    \   . ' ' . s:GetDialectArgument() . ' -f gcc -'
-endfunction
-
 function! s:GetDialectArgument() abort
     if exists('b:is_bash') && b:is_bash
         return '-s bash'
@@ -38,12 +28,15 @@ endfunction
 function! ale_linters#sh#shellcheck#GetCommand(buffer) abort
     let l:exclude_option = ale#Var(a:buffer, 'sh_shellcheck_exclusions')
 
-    let l:command = ale#Var(a:buffer, s:linter.'_executable')
-    \   . ' ' . ale#Var(a:buffer, 'sh_shellcheck_options')
-    \   . ' ' . (!empty(l:exclude_option) ? '-e ' . l:exclude_option : '')
-    \   . ' ' . s:GetDialectArgument() . ' -f gcc -'
-
-    return ale#docker#PrepareRunCmd(a:buffer, s:linter, l:command)
+    " let l:command = ale#linter#util#GetCommand(buffer, s:linter)
+    let l:command = ale#Escape(ale#Var(a:buffer, s:linter.'_executable')) . ' '
+    \  . ale#Var(a:buffer, s:linter.'_options') . ' '
+    \  . (!empty(l:exclude_option) ? '-e ' . l:exclude_option : '') . ' '
+    \  . s:GetDialectArgument() . ' -f gcc '
+    if ale#linter#util#ShouldUseDocker(a:buffer, s:linter)
+        return ale#docker#PrepareRunCmd(a:buffer, s:linter, l:command.' %s')
+    endif
+    return l:command . ' -'
 endfunction
 
 call ale#linter#Define('sh', {
