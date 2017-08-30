@@ -23,6 +23,7 @@ CONTENTS                                                         *ale-contents*
       vale................................|ale-asciidoc-vale|
     c.....................................|ale-c-options|
       clang...............................|ale-c-clang|
+      clangtidy...........................|ale-c-clangtidy|
       cppcheck............................|ale-c-cppcheck|
       gcc.................................|ale-c-gcc|
       clang-format........................|ale-c-clangformat|
@@ -143,6 +144,8 @@ CONTENTS                                                         *ale-contents*
     tex...................................|ale-tex-options|
       chktex..............................|ale-tex-chktex|
       lacheck.............................|ale-tex-lacheck|
+    thrift................................|ale-thrift-options|
+      thrift..............................|ale-thrift-thrift|
     typescript............................|ale-typescript-options|
       eslint..............................|ale-typescript-eslint|
       tslint..............................|ale-typescript-tslint|
@@ -201,7 +204,7 @@ Notes:
 * Asciidoc: `proselint`, `vale`
 * Bash: `shell` (-n flag), `shellcheck`
 * Bourne Shell: `shell` (-n flag), `shellcheck`
-* C: `cppcheck`, `cpplint`!!, `gcc`, `clang`, `clang-format`
+* C: `cppcheck`, `cpplint`!!, `gcc`, `clang`, `clangtidy`!!, `clang-format`
 * C++ (filetype cpp): `clang`, `clangcheck`!!, `clangtidy`!!, `cppcheck`, `cpplint`!!, `gcc`, `clang-format`
 * C#: `mcs`
 * Chef: `foodcritic`
@@ -224,8 +227,8 @@ Notes:
 * Haskell: `ghc`, `stack-ghc`, `stack-build`!!, `ghc-mod`, `stack-ghc-mod`, `hlint`, `hdevtools`
 * HTML: `HTMLHint`, `proselint`, `tidy`
 * Idris: `idris`
-* Java: `javac`
-* JavaScript: `eslint`, `jscs`, `jshint`, `flow`, `prettier`, `prettier-eslint`, `xo`
+* Java: `checkstyle`, `javac`
+* JavaScript: `eslint`, `jscs`, `jshint`, `flow`, `prettier`, `prettier-eslint` >= 4.2.0, `prettier-standard`, `standard`, `xo`
 * JSON: `jsonlint`
 * Kotlin: `kotlinc`
 * LaTeX (tex): `chktex`, `lacheck`, `proselint`
@@ -261,7 +264,8 @@ Notes:
 * Swift: `swiftlint`, `swiftformat`
 * Tcl: `nagelfar`!!
 * Texinfo: `proselint`
-* Text: `proselint`, `vale`
+* Text^: `proselint`, `vale`
+* Thrift: `thrift`
 * TypeScript: `eslint`, `tslint`, `tsserver`, `typecheck`
 * Verilog: `iverilog`, `verilator`
 * Vim: `vint`
