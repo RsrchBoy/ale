@@ -69,6 +69,7 @@ function! ale#docker#PrepareRunCmd(buffer, linter_fullname, command) abort
     \   . ' --label ale.linter.linter=' . a:linter_fullname . ' '
 
     return 'docker '
+    \   . '--network=none '
     \   . ale#Var(a:buffer, 'docker_run_cmd') . ' --entrypoint="" '
     \   . ' --workdir=' . l:root
     \   . l:labels
