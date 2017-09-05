@@ -42,7 +42,7 @@ function! ale_linters#vim#vint#GetCommand(buffer, version_output) abort
     \   . s:enable_neovim
     \   . s:format
     \   . ale#Var(a:buffer, s:linter.'_options')
-    \   . ' %t'
+    \   . ' %s'
 
     " Check the Vint version if we haven't checked it already.
     let l:command = ale#docker#PrepareRunCmd(a:buffer, s:linter, l:command)
