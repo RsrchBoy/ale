@@ -3,10 +3,6 @@
 
 let s:linter = 'php_phpstan'
 
-" " Set to change the ruleset
-" let g:ale_php_phpstan_executable = get(g:, 'ale_php_phpstan_executable', 'phpstan')
-" let g:ale_php_phpstan_level = get(g:, 'ale_php_phpstan_level', '4')
-
 " FIXME
 call ale#Set(s:linter.'_level', '4')
 call ale#Set(s:linter.'_options', ' analyze --errorFormat raw -l ' . g:ale_php_phpstan_level)
