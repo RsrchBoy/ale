@@ -20,7 +20,7 @@ function! ale_linters#perl#perl#Handle(buffer, lines) abort
     for l:match in ale#util#GetMatches(a:lines, l:pattern)
         let l:line = l:match[3]
         let l:text = l:match[1]
-        let l:type = 'E'
+        let l:type = 'W'
 
         if ale#path#IsBufferPath(a:buffer, l:match[2])
         \ && (

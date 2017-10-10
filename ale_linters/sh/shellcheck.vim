@@ -54,4 +54,5 @@ call ale#linter#Define('sh', {
 \   'executable_callback': { buffer -> ale#linter#util#GetBufExec(buffer, s:linter) },
 \   'command_callback':    'ale_linters#sh#shellcheck#GetCommand',
 \   'callback':            'ale#handlers#gcc#HandleGCCFormat',
+\   'output': 'both',
 \})
